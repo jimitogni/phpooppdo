@@ -4,24 +4,24 @@ require_once "../../classes/Usuario.class.php";
 require_once "../../classes/Funcoes.class.php";
 
 //ESTANCIANDO A CLASSE
-$objFunc = new Usuario();
+$objUsuario = new Usuario();
 $objFc = new Funcoes();
 
 //VALIDANDO USUARIO
 session_start();
 
 if($_SESSION["logado"] == "sim"){
-    $objFunc->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
+    $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
 }else{
     header("location: ../../"); 
 }
 if(isset($_GET['sair']) == "sim"){
-    $objFunc->usuarioLogado();
+    $objUsuario->usuarioLogado();
 }
 
 //CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){
-    if($objFunc->insere($_POST) == 'ok'){
+    if($objUsuario->insere($_POST) == 'ok'){
         header('location: ');
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -30,7 +30,7 @@ if(isset($_POST['btCadastrar'])){
 
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
-    if($objFunc->updade($_POST) == 'ok'){
+    if($objUsuario->updade($_POST) == 'ok'){
         header('location: ?acao=edit&func='.$_GET['func']);
     }else{
         echo '<script type="text/javascript">alert("Erro em atualizar");</script>';
@@ -40,9 +40,9 @@ if(isset($_POST['btAlterar'])){
 //SELECIONADO O FUNCIONARIO
 if(isset($_GET['acao'])){
     switch($_GET['acao']){
-        case 'edit': $func = $objFunc->selecionaUm($_GET['func']); break;
+        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
         case 'delet': 
-            if($objFunc->delete($_GET['func']) == 'ok'){
+            if($objUsuario->delete($_GET['usuario']) == 'ok'){
                 header('location: usuario');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
@@ -83,13 +83,13 @@ if(isset($_GET['acao'])){
     <div class="panel panel-primary">
         <div class="panel-heading"> <h3 class="panel-title">Lista</h3> </div>
         <div class="panel-body">
-            <?php foreach($objFunc->selecionaTudo() as $rst){ ?>
+            <?php foreach($objUsuario->selecionaTudo() as $rst){ ?>
             <div class="funcionario">
                 <div class="nome"><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
                 
-                <div class="editar"><a href="?acao=edit&func=<?=$objFc->base64($rst['pk'], 1)?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div class="editar"><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
                 
-                <div class="excluir"><a href="?acao=delet&func=<?=$objFc->base64($rst['pk'], 1)?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div class="excluir"><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
@@ -98,17 +98,20 @@ if(isset($_GET['acao'])){
 
 <div id="formulario">
     <form name="formCad" action="" method="post">
-        <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($func['nome']))?($func['nome']):(''), 2)?>"><br>        
+        <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
         
-        <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($func['email']))?($func['email']):(''), 2)?>"><br>
+        <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
+
         <?php if(isset($_GET['acao']) <> 'edit'){ ?>
-        
         <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
         <?php } ?>
+
+        <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
+
         
         <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
         
-        <input type="hidden" name="func" value="<?=(isset($func['pk']))?($objFc->base64($func['pk'], 1)):('')?>">
+        <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
     </form>
 </div>
  

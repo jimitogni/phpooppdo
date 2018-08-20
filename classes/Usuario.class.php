@@ -34,8 +34,8 @@ class Usuario {
 	
 	public function selecionaUm($dado){
 		try{
-			$this->idUsuario = $this->objfc->base64($dado, 2);
-			$cst = $this->con->conectar()->prepare("SELECT `idUsuario`, `nome`, `email`, `data_cadastro` FROM `usuarios` WHERE `idUsuario` = :idUsuario;");
+			$this->idUsuario = $dado;
+			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nome`, `email`, `data_cadastro` FROM `usuarios` WHERE `pk` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
@@ -98,7 +98,7 @@ class Usuario {
 	public function delete($dado){
 		try{
 			$this->idUsuario = $this->objfc->base64($dado, 2);
-			$cst = $this->con->conectar()->prepare("DELETE FROM `usuarios` WHERE `idUsuario` = :idUsuario;");
+			$cst = $this->con->conectar()->prepare("DELETE FROM `usuarios` WHERE `pk` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			if($cst->execute()){
 				return 'ok';
