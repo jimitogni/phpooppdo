@@ -97,7 +97,7 @@ class Usuario {
 	
 	public function delete($dado){
 		try{
-			$this->idUsuario = $this->objfc->base64($dado, 2);
+			$this->idUsuario = $dado;
 			$cst = $this->con->conectar()->prepare("DELETE FROM `usuarios` WHERE `pk` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			if($cst->execute()){
