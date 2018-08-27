@@ -114,6 +114,43 @@ if(isset($_GET['acao'])){
         <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
     </form>
 </div>
+
+
+<div id="listaAnuncios">
+    <div class="panel panel-seconday">
+        <div class="panel-heading"> <h3 class="panel-title">Lista</h3> </div>
+        <div class="panel-body">
+            <?php foreach($objUsuario->selecionaTudo() as $rst){ ?>
+            <div class="funcionario">
+                <div class="nome"><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
+                
+                <div class="editar"><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                
+                <div class="excluir"><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
+<div id="formularioAnuncios">
+    <form name="formCad" action="" method="post">
+        <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
+        
+        <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
+
+        <?php if(isset($_GET['acao']) <> 'edit'){ ?>
+        <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
+        <?php } ?>
+
+        <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
+
+        
+        <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
+        
+        <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
+    </form>
+</div>
  
 </body>
 </html>

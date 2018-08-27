@@ -12,6 +12,8 @@
 	height: 400px;
 }
 
+
+
 #lista .funcionario{
 	height: 16px;
 }
@@ -38,6 +40,45 @@
 	float: left;
 	margin: 0 0 0 10px;
 }
+
+////////////////////
+
+#listaAnuncio{
+	font: 13px Verdana, Geneva, sans-serif;
+	margin: 0 0 0 20px;
+	float: left;
+	width: 300px;
+	height: 400px;
+}
+
+#listaAnuncio .funcionario{
+	height: 16px;
+}
+
+#listaAnuncio .funcionario + .funcionario{
+	margin: 7px 0 0 0;
+}
+
+#listaAnuncio .funcionario img{
+	border: 0;
+}
+
+#listaAnuncio .funcionario .nome{
+	float: left;
+	width: 215px;
+}
+
+#listaAnuncio .funcionario .editar{
+	float: left;
+	margin: 0 0 0 10px;
+}
+
+#listaAnuncio .funcionario .excluir{
+	float: left;
+	margin: 0 0 0 10px;
+}
+
+
 
 #formulario{
 	float: left;
@@ -66,4 +107,25 @@
 	width: 299px;
 }
 
+
+#formularioAnuncio label{
+	font: 13px Verdana, Geneva, sans-serif;
+}
+
+#formularioAnuncio input[name="nome"]{
+	width: 295px;
+}
+
+#formularioAnuncio input[name="email"]{
+	width: 293px;
+}
+
+#formularioAnuncio input[name="senha"]{
+	width: 295px;
+}
+
+#formularioAnuncio input[type="submit"]{
+	font: 20px Verdana, Geneva, sans-serif;
+	width: 299px;
+}
 
