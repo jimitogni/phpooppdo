@@ -81,7 +81,7 @@ class Usuario {
 			$this->idUsuario = $this->objfc->base64($dados['func'], 2);
 			$this->nome = $dados['nome'];
 			$this->email = $dados['email'];
-			$cst = $this->con->conectar()->prepare("UPDATE `usuarios` SET `nome` = :nome, `email` = :email WHERE `idUsuario` = :idUsuario;");
+			$cst = $this->con->conectar()->prepare("UPDATE `usuarios` SET `nome` = :nome, `email` = :email WHERE `pk` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			$cst->bindParam(":nome", $this->nome, PDO::PARAM_STR);
 			$cst->bindParam(":email", $this->email, PDO::PARAM_STR);

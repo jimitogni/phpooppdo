@@ -31,7 +31,7 @@ if(isset($_POST['btCadastrar'])){
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
     if($objUsuario->updade($_POST) == 'ok'){
-        header('location: ?acao=edit&func='.$_GET['func']);
+        header('location: ?acao=edit&usuario='.$_GET['usuario']);
     }else{
         echo '<script type="text/javascript">alert("Erro em atualizar");</script>';
     }
@@ -43,7 +43,7 @@ if(isset($_GET['acao'])){
         case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
         case 'delet': 
             if($objUsuario->delete($_GET['usuario']) == 'ok'){
-                header('location: usuario');
+                header('location: ');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
             }
