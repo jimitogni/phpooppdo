@@ -56,18 +56,21 @@ if(isset($_GET['acao'])){
 <head>
     <meta charset="utf-8">
     <title>Formulário de cadastro</title>
+
     <link href="../../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="../../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="../css/estilo-funcionario.css" rel="stylesheet" type="text/css" media="all">
-    <script src="../../bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-radius">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li><a href="../../admin">Home</a></li>
-      <li class="active"><a href="#x">Usuario</a></li>
+<!-- BARRA DE NAVEGACAO -->
+<div class="container-fluid">
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+<a class="navbar-brand" href="#">LOGO</a>
+    <ul class="navbar-nav mr-auto">
+      <li><a class="nav-link nav-item" href="../../admin">Home</a></li>
+      <li><a class="nav-link nav-item" href="#x">Usuario</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?=$_SESSION['email']?></a></li>
@@ -76,81 +79,104 @@ if(isset($_GET['acao'])){
 
       <li><a href="?sair=sim"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
     </ul>
-  </div>
+ 
 </nav>
+</div>
+<!-- FIM BARRA DE NAVEGACAO -->
 
-<div id="lista">
-    <div class="panel panel-primary">
-        <div class="panel-heading"> <h3 class="panel-title">Lista</h3> </div>
-        <div class="panel-body">
+<!-- LISTAGEM DE USUARIOS QUE VEM DO BANCO DE DADOS -->
+<div class="container">
+
+<div class="row">
+
+    <div class="col-6">
+        <div class="border bg-light panel panel-primary list-group"> 
+        <h3>Lista</h3>
             <?php foreach($objUsuario->selecionaTudo() as $rst){ ?>
-            <div class="funcionario">
-                <div class="nome"><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
+            <div class="list-group-item">
+                <div><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
                 
-                <div class="editar"><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
                 
-                <div class="excluir"><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
     </div>
-</div>
 
-<div id="formulario">
-    <form name="formCad" action="" method="post">
-        <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
-        
-        <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
+<!-- FIM LISTAGEM DE USUARIOS QUE VEM DO BANCO DE DADOS -->
 
-        <?php if(isset($_GET['acao']) <> 'edit'){ ?>
-        <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
-        <?php } ?>
+    <!-- FORMULARIO PARA CRIAR E ALTERAR USUÁRIOS -->
+    <div class="panel panel-primary list-group col-6 border bg-light">
+            <form name="formCad" action="" method="post">
+                <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
+                
+                <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
 
-        <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
+                <?php if(isset($_GET['acao']) <> 'edit'){ ?>
+                <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
+                <?php } ?>
 
-        
-        <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
-        
-        <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
-    </form>
-</div>
+                <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
 
+                
+                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
+                
+                <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
+            </form>
+    </div>
 
-<div id="listaAnuncios">
-    <div class="panel panel-seconday">
-        <div class="panel-heading"> <h3 class="panel-title">Lista</h3> </div>
-        <div class="panel-body">
+</div><!-- FECHA A ROW -->
+    
+
+<!-- espaço -->
+<br> <br>
+
+<!-- LISTAR ANUNCIOS -->
+
+<div class="row">
+
+    <div class="col-6">
+        <div class="border bg-light panel panel-primary list-group"> 
+        <h3>Lista Anuncios</h3>
             <?php foreach($objUsuario->selecionaTudo() as $rst){ ?>
-            <div class="funcionario">
-                <div class="nome"><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
+            <div class="list-group-item">
+                <div><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
                 
-                <div class="editar"><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
                 
-                <div class="excluir"><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
     </div>
-</div>
 
-<div id="formularioAnuncios">
-    <form name="formCad" action="" method="post">
-        <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
-        
-        <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
+<!-- FIM LISTAR ANUNCIOS -->
 
-        <?php if(isset($_GET['acao']) <> 'edit'){ ?>
-        <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
-        <?php } ?>
 
-        <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
+<!-- CRIAR OU ALTERAR ANUNCIOS -->
+<!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
+    <div class="panel panel-primary list-group col-6 border bg-light">
+            <form name="formCad" action="" method="post">
+                <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
+                
+                <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
 
-        
-        <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
-        
-        <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
-    </form>
-</div>
+                <?php if(isset($_GET['acao']) <> 'edit'){ ?>
+                <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
+                <?php } ?>
+
+                <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
+
+                
+                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
+                
+                <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
+            </form>
+    </div>
+</div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->
+
+</div><!-- FECHA A CONTAINER -->
  
 </body>
 </html>
