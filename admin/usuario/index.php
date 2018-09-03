@@ -5,6 +5,7 @@ require_once "../../classes/Funcoes.class.php";
 require_once "../../classes/Produto.class.php";
 
 //ESTANCIANDO A CLASSE
+$objUsuario = new Usuario();
 $objProduto = new Produto();
 $objFc = new Funcoes();
 

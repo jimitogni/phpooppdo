@@ -4,7 +4,7 @@ include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
 
 //CRIANDO A CLASSE
-class Usuario {
+class Produto {
 	
 	//ATRIBUTOS
 	private $con;
@@ -47,6 +47,7 @@ class Usuario {
 		}
 	}
 	
+	
 	public function selecionaTudo(){
 		try{
 			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nome`, `email`, `data_cadastro` FROM `usuarios`");
@@ -56,6 +57,7 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
+
 	
 	public function insereProduto($dados){
 		try{
@@ -66,7 +68,7 @@ class Usuario {
 			$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nomeProduto`, `descricaoProduto`, `preco`, `dataCadastro`, `vencimento`, ``) VALUES (:nome, :email, :senha, :data);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nomeProduto`, `descricaoProduto`, `preco`, `dataCadastro`, `vencimento`, `fornecedor`) VALUES (:nomeProduto, :descricaoProduto, :preco, :dataCadastro, :vencimento, :fornecedor);");
 
 			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
 			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
@@ -85,6 +87,7 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
+
 	
 	public function updade($dados){
 		try{
