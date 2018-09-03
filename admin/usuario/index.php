@@ -4,7 +4,7 @@ require_once "../../classes/Usuario.class.php";
 require_once "../../classes/Funcoes.class.php";
 
 //ESTANCIANDO A CLASSE
-$objUsuario = new Usuario();
+$objProduto = new Produto();
 $objFc = new Funcoes();
 
 //VALIDANDO USUARIO
@@ -22,6 +22,15 @@ if(isset($_GET['sair']) == "sim"){
 //CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){
     if($objUsuario->insere($_POST) == 'ok'){
+        header('location: ');
+    }else{
+        echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
+    }
+}
+
+//CADASTRANDO O Produto
+if(isset($_POST['btCadastrarProduto'])){
+    if($objProduto->insereProduto($_POST) == 'ok'){
         header('location: ');
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -170,7 +179,7 @@ if(isset($_GET['acao'])){
                 
 
                 
-                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
+                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
                 
                 <input type="hidden" name="func" value="<?=(isset($produto['pk']))?($objFc->base64($produto['pk'], 1)):('')?>">
             </form>
