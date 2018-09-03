@@ -158,20 +158,21 @@ if(isset($_GET['acao'])){
 <!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post">
-                <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
+                <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nomeProduto']))?($produto['nomeProduto']):(''), 2)?>"><br>  
+
+                <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricaoProduto']))?($produto['descricaoProduto']):(''), 2)?>"><br>
+
+                <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['preco']))?($produto['preco']):(''), 2)?>"><br>
+
+                <input class="form-control" name="vencimento" type="text" placeholder="Vencimento:" value="<?=$objFc->tratarCaracter((isset($produto['vencimento']))?($produto['vencimento']):(''), 2)?>"><br>
+
+                <input class="form-control" name="fornecedor" type="text" placeholder="fornecedor:" value="<?=$objFc->tratarCaracter((isset($produto['fornecedor']))?($usuario['fornecedor']):(''), 2)?>"><br>      
                 
-                <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
-
-                <?php if(isset($_GET['acao']) <> 'edit'){ ?>
-                <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
-                <?php } ?>
-
-                <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
 
                 
                 <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
                 
-                <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
+                <input type="hidden" name="func" value="<?=(isset($produto['pk']))?($objFc->base64($produto['pk'], 1)):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->
