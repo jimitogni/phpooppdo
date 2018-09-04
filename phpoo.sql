@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 03-Set-2018 às 21:01
+-- Generation Time: 04-Set-2018 às 19:14
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -27,13 +27,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `produtos` (
-  `pk` int(11) NOT NULL,
-  `nomeProduto` int(11) NOT NULL,
-  `descricaoProduto` int(11) NOT NULL,
-  `preco` int(11) NOT NULL,
-  `dataCadastro` int(11) NOT NULL,
-  `vencimento` int(11) NOT NULL,
-  `fornecedor` int(11) NOT NULL
+  `pk_produto` int(2) NOT NULL,
+  `nome_produto` varchar(20) NOT NULL,
+  `descricao_produto` varchar(20) NOT NULL,
+  `valor_produto` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -56,13 +53,19 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`) VALUES
-(11, 'jimi2', 'jimi@jimi.com', '2018-08-27', '1234', 0),
+(11, 'jimi2', '1', '2018-08-27', '1', 0),
 (12, 'jimi3', 'jimi3@jimi.com', '2018-08-27', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0),
 (13, 'jimiasda', 'aefaefateste2@teste.com', '2018-08-27', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `produtos`
+--
+ALTER TABLE `produtos`
+  ADD PRIMARY KEY (`pk_produto`);
 
 --
 -- Indexes for table `usuarios`
@@ -74,6 +77,11 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `produtos`
+--
+ALTER TABLE `produtos`
+  MODIFY `pk_produto` int(2) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
