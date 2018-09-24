@@ -48,12 +48,26 @@ if(isset($_POST['btAlterar'])){
     }
 }
 
-//SELECIONADO O FUNCIONARIO
+/*//SELECIONADO O FUNCIONARIO
 if(isset($_GET['acao'])){
     switch($_GET['acao']){
-        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
+        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['pk_produto']); break;
         case 'delet': 
-            if($objUsuario->delete($_GET['usuario']) == 'ok'){
+            if($objUsuario->delete($_GET['pk_produto']) == 'ok'){
+                header('location: ');
+            }else{
+                echo '<script type="text/javascript">alert("Erro em deletar");</script>';
+            }
+                break;
+    }
+}*/
+
+//SELECIONADO UM PRODUTO OU ANUNCI
+if(isset($_GET['acao'])){
+    switch($_GET['acao']){
+        case 'edit': $produto = $objProduto->selecionaUmProduto($_GET['produto']); break;
+        case 'delet': 
+            if($objProduto->delete($_GET['produto']) == 'ok'){
                 header('location: ');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
@@ -61,6 +75,7 @@ if(isset($_GET['acao'])){
                 break;
     }
 }
+
 ?>
 <!DOCTYPE HTML>
 <html lang="pt-br">
@@ -153,10 +168,10 @@ if(isset($_GET['acao'])){
             <?php foreach($objProduto->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
                 <div><?=$objFc->tratarCaracter($rst['nome_produto'], 2)?></div>
+                <div>valor: <?echo "$rst['valor_produto']"?></div>
+                <div><a href="?acao=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
                 
-                <div><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
-                
-                <div><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acao=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
@@ -177,7 +192,7 @@ if(isset($_GET['acao'])){
 
                 <input class="form-control" name="vencimento" type="text" placeholder="Vencimento:" value="<?=$objFc->tratarCaracter((isset($produto['vencimento']))?($produto['vencimento']):(''), 2)?>"><br>
 
-                <input class="form-control" name="fornecedor" type="text" placeholder="fornecedor:" value="<?=$objFc->tratarCaracter((isset($produto['fornecedor']))?($usuario['fornecedor']):(''), 2)?>"><br>      
+                <input class="form-control" name="fornecedor" type="text" placeholder="fornecedor:" value="<?=$objFc->tratarCaracter((isset($produto['fornecedor']))?($produto['fornecedor']):(''), 2)?>"><br>      
                 
 
                 

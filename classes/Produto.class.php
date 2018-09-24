@@ -37,7 +37,7 @@ class Produto {
 	public function selecionaUmProduto($dado){
 		try{
 			$this->idProduto = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nomeProduto`, `preco`, `descricaoProduto` FROM `produtos` WHERE `pk` = :idProduto;");
+			$cst = $this->con->conectar()->prepare("SELECT  `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos` WHERE `pk` = :idProduto;");
 			$cst->bindParam(":idProduto", $this->idProduto, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
@@ -68,14 +68,14 @@ class Produto {
 			$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nomeProduto`, `descricaoProduto`, `preco`, `dataCadastro`, `vencimento`, `fornecedor`) VALUES (:nomeProduto, :descricaoProduto, :preco, :dataCadastro, :vencimento, :fornecedor);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`) VALUES (:nomeProduto, :descricaoProduto, :preco);");
 
 			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
 			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
 			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
-			$cst->bindParam(":dataCadastro", $this->dataCadastro, PDO::PARAM_STR);
-			$cst->bindParam(":vencimento", $this->vencimento, PDO::PARAM_STR);
-			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
+			//$cst->bindParam(":dataCadastro", $this->dataCadastro, PDO::PARAM_STR);
+			//$cst->bindParam(":vencimento", $this->vencimento, PDO::PARAM_STR);
+			//$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
 
 
 			if($cst->execute()){
@@ -111,7 +111,7 @@ class Produto {
 	public function delete($dado){
 		try{
 			$this->idUsuario = $dado;
-			$cst = $this->con->conectar()->prepare("DELETE FROM `usuarios` WHERE `pk` = :idUsuario;");
+			$cst = $this->con->conectar()->prepare("DELETE FROM `produto` WHERE `pk_produto` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			if($cst->execute()){
 				return 'ok';
