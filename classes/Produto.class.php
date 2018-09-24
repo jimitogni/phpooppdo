@@ -50,7 +50,7 @@ class Produto {
 	
 	public function selecionaTudo(){
 		try{
-			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nome`, `email`, `data_cadastro` FROM `usuarios`");
+			$cst = $this->con->conectar()->prepare("SELECT `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos`");
 			$cst->execute();
 			return $cst->fetchAll();
 		}catch(PDOException $e){

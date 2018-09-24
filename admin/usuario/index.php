@@ -150,9 +150,9 @@ if(isset($_GET['acao'])){
     <div class="col-6">
         <div class="border bg-light panel panel-primary list-group"> 
         <h3>Lista Anuncios</h3>
-            <?php foreach($objUsuario->selecionaTudo() as $rst){ ?>
+            <?php foreach($objProduto->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
-                <div><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
+                <div><?=$objFc->tratarCaracter($rst['nome_produto'], 2)?></div>
                 
                 <div><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
                 
