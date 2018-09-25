@@ -184,17 +184,12 @@ if(isset($_GET['acao'])){
 <!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post">
-                <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nomeProduto']))?($produto['nomeProduto']):(''), 2)?>"><br>  
+                <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>  
 
-                <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricaoProduto']))?($produto['descricaoProduto']):(''), 2)?>"><br>
+                <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
 
-                <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['preco']))?($produto['preco']):(''), 2)?>"><br>
-
-                <input class="form-control" name="vencimento" type="text" placeholder="Vencimento:" value="<?=$objFc->tratarCaracter((isset($produto['vencimento']))?($produto['vencimento']):(''), 2)?>"><br>
-
-                <input class="form-control" name="fornecedor" type="text" placeholder="fornecedor:" value="<?=$objFc->tratarCaracter((isset($produto['fornecedor']))?($produto['fornecedor']):(''), 2)?>"><br>      
+                <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>   
                 
-
                 
                 <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
                 

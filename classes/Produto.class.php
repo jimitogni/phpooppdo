@@ -37,7 +37,7 @@ class Produto {
 	public function selecionaUmProduto($dado){
 		try{
 			$this->idProduto = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT  `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos` WHERE `pk` = :idProduto;");
+			$cst = $this->con->conectar()->prepare("SELECT  `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos` WHERE `pk_produto` = :idProduto;");
 			$cst->bindParam(":idProduto", $this->idProduto, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
@@ -64,9 +64,9 @@ class Produto {
 			$this->nomeProduto = $this->objfc->tratarCaracter($dados['nomeProduto'], 1);
 			$this->descricaoProduto = $this->objfc->tratarCaracter($dados['descricaoProduto'], 1);
 			$this->preco = $dados['preco'];
-			$this->dataCadastro = $this->objfc->dataAtual(2);
-			$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
-			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
+			//$this->dataCadastro = $this->objfc->dataAtual(2);
+			//$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
+			//$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 
 			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`) VALUES (:nomeProduto, :descricaoProduto, :preco);");
 
