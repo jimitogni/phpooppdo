@@ -110,9 +110,9 @@ class Produto {
 	
 	public function delete($dado){
 		try{
-			$this->idUsuario = $dado;
-			$cst = $this->con->conectar()->prepare("DELETE FROM `produto` WHERE `pk_produto` = :idUsuario;");
-			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
+			$this->pkProduto = $dado;
+			$cst = $this->con->conectar()->prepare("DELETE FROM `produtos` WHERE `pk_produto` = :pkProduto;");
+			$cst->bindParam(":pkProduto", $this->pkProduto, PDO::PARAM_INT);
 			if($cst->execute()){
 				return 'ok';
 			}else{

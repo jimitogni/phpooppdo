@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 04-Set-2018 às 19:14
+-- Generation Time: 25-Set-2018 às 21:10
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -27,11 +27,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `produtos` (
-  `pk_produto` int(2) NOT NULL,
   `nome_produto` varchar(20) NOT NULL,
   `descricao_produto` varchar(20) NOT NULL,
-  `valor_produto` float NOT NULL
+  `valor_produto` float NOT NULL,
+  `pk_produto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `produtos`
+--
+
+INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `pk_produto`) VALUES
+('teste', 'teste', 99999, 1),
+('teste 2', 'teste 2', 99999, 2),
+('teste 2', 'teste 2', 9999, 3),
+('teste', 'teste', 9999, 4),
+('teste', 'teste', 333, 5),
+('afefsfgasrgasrgasrga', 'asrgsrgasrgarsgsrg', 3333, 6),
+('afefsfgasrgasrgasrga', 'asrgsrgasrgarsgsrg', 3333, 7);
 
 -- --------------------------------------------------------
 
@@ -53,8 +66,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`) VALUES
-(11, 'jimi2', '1', '2018-08-27', '1', 0),
-(12, 'jimi3', 'jimi3@jimi.com', '2018-08-27', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0),
+(11, 'jimi2', 'jimi@jimi.com', '2018-08-27', '1234', 0),
+(12, 'jimi3', '1', '2018-08-27', '1', 0),
 (13, 'jimiasda', 'aefaefateste2@teste.com', '2018-08-27', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
 
 --
@@ -81,7 +94,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `pk_produto` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
