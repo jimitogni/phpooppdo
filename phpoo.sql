@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 25-Set-2018 às 21:10
--- Versão do servidor: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Host: localhost:3306
+-- Generation Time: 01-Out-2018 às 13:34
+-- Versão do servidor: 10.1.35-MariaDB-1
+-- PHP Version: 7.0.31-1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,13 +38,21 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `pk_produto`) VALUES
-('teste', 'teste', 99999, 1),
-('teste 2', 'teste 2', 99999, 2),
-('teste 2', 'teste 2', 9999, 3),
-('teste', 'teste', 9999, 4),
-('teste', 'teste', 333, 5),
-('afefsfgasrgasrgasrga', 'asrgsrgasrgarsgsrg', 3333, 6),
-('afefsfgasrgasrgasrga', 'asrgsrgasrgarsgsrg', 3333, 7);
+('hquefhauefh', 'ehfuahfuah', 333, 8),
+('produto 1', 'produto 1', 9999, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `receita`
+--
+
+CREATE TABLE `receita` (
+  `idreceira` int(11) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
+  `receita` varchar(200) NOT NULL,
+  `datacriacao` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -67,8 +75,21 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`) VALUES
 (11, 'jimi2', 'jimi@jimi.com', '2018-08-27', '1234', 0),
-(12, 'jimi3', '1', '2018-08-27', '1', 0),
-(13, 'jimiasda', 'aefaefateste2@teste.com', '2018-08-27', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 0);
+(16, 'teste', 'teste@teste.com', '2018-10-01', '29a2c3d7a6b729c3db4bb4a57f7bfff7d6679119', 0),
+(17, 'Jimi Togni', 'ana@ana.com', '2018-10-01', '72019bbac0b3dac88beac9ddfef0ca808919104f', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `videos`
+--
+
+CREATE TABLE `videos` (
+  `idvideo` int(5) NOT NULL,
+  `url` varchar(50) NOT NULL,
+  `descricao` varchar(20) NOT NULL,
+  `nivel` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -81,10 +102,22 @@ ALTER TABLE `produtos`
   ADD PRIMARY KEY (`pk_produto`);
 
 --
+-- Indexes for table `receita`
+--
+ALTER TABLE `receita`
+  ADD PRIMARY KEY (`idreceira`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`pk`);
+
+--
+-- Indexes for table `videos`
+--
+ALTER TABLE `videos`
+  ADD PRIMARY KEY (`idvideo`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -94,12 +127,22 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `receita`
+--
+ALTER TABLE `receita`
+  MODIFY `idreceira` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `videos`
+--
+ALTER TABLE `videos`
+  MODIFY `idvideo` int(5) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
