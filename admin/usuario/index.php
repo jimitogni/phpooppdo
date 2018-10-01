@@ -15,7 +15,7 @@ session_start();
 if($_SESSION["logado"] == "sim"){
     $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
 }else{
-    header("location: ../../"); 
+    header("location: ../../");
 }
 if(isset($_GET['sair']) == "sim"){
     $objUsuario->usuarioLogado();
@@ -48,25 +48,26 @@ if(isset($_POST['btAlterar'])){
     }
 }
 
-/*//SELECIONADO O FUNCIONARIO
-if(isset($_GET['acao'])){
-    switch($_GET['acao']){
-        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['pk_produto']); break;
-        case 'delet': 
-            if($objUsuario->delete($_GET['pk_produto']) == 'ok'){
-                header('location: ');
+//SELECIONADO O FUNCIONARIO
+if(isset($_GET['acaoU'])){
+    switch($_GET['acaoU']){
+        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['pk']); break;
+        case 'delet':
+            if($objUsuario->delete($_GET['pk']) == 1){
+                echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
+                header('location: /admin/usuario');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
             }
                 break;
     }
-}*/
+}
 
 //SELECIONADO UM PRODUTO OU ANUNCI
-if(isset($_GET['acao'])){
-    switch($_GET['acao']){
+if(isset($_GET['acaoP'])){
+    switch($_GET['acaoP']){
         case 'edit': $produto = $objProduto->selecionaUmProduto($_GET['produto']); break;
-        case 'delet': 
+        case 'delet':
             if($objProduto->delete($_GET['produto']) == 'ok'){
                 header('location: ');
             }else{
@@ -84,7 +85,7 @@ if(isset($_GET['acao'])){
     <title>Formulário de cadastro</title>
 
     <link href="../../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </head>
@@ -105,7 +106,7 @@ if(isset($_GET['acao'])){
 
       <li><a href="?sair=sim"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
     </ul>
- 
+
 </nav>
 </div>
 <!-- FIM BARRA DE NAVEGACAO -->
@@ -114,29 +115,27 @@ if(isset($_GET['acao'])){
 <div class="container">
 
 <div class="row">
-
     <div class="col-6">
-        <div class="border bg-light panel panel-primary list-group"> 
+        <div class="border bg-light panel panel-primary list-group">
         <h3>Lista</h3>
             <?php foreach($objUsuario->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
                 <div><?=$objFc->tratarCaracter($rst['nome'], 2)?></div>
-                
-                <div><a href="?acao=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
-                
-                <div><a href="?acao=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+
+                <div><a href="?acaoU=edit&usuario=<?=$rst['pk']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+
+                <div><a href="?acaoU=delet&usuario=<?=$rst['pk']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
     </div>
-
 <!-- FIM LISTAGEM DE USUARIOS QUE VEM DO BANCO DE DADOS -->
 
-    <!-- FORMULARIO PARA CRIAR E ALTERAR USUÁRIOS -->
+<!-- FORMULARIO PARA CRIAR E ALTERAR USUÁRIOS -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post">
-                <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>        
-                
+                <input class="form-control" name="nome" type="text" required="required"  placeholder="Nome:" value="<?=$objFc->tratarCaracter((isset($usuario['nome']))?($usuario['nome']):(''), 2)?>"><br>
+
                 <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
 
                 <?php if(isset($_GET['acao']) <> 'edit'){ ?>
@@ -145,60 +144,56 @@ if(isset($_GET['acao'])){
 
                 <? echo "Usuario para ser alterado eh ". $usuario['nome'] ?>
 
-                
-                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
-                
+
+                <button type="submit" name="<?=(isset($_GET['acaoU']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acaoU']) == 'edit')?('Alterar'):('Cadastrar')?></button>
+
                 <input type="hidden" name="func" value="<?=(isset($usuario['pk']))?($objFc->base64($usuario['pk'], 1)):('')?>">
             </form>
     </div>
 
 </div><!-- FECHA A ROW -->
-    
+
 
 <!-- espaço -->
 <br> <br>
 
 <!-- LISTAR ANUNCIOS -->
-
 <div class="row">
-
     <div class="col-6">
-        <div class="border bg-light panel panel-primary list-group"> 
+        <div class="border bg-light panel panel-primary list-group">
         <h3>Lista Anuncios</h3>
             <?php foreach($objProduto->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
-                <div><?=$objFc->tratarCaracter($rst['nome_produto'], 2)?></div>
-                <div>valor: <?echo "$rst['valor_produto']"?></div>
-                <div><a href="?acao=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
-                
-                <div><a href="?acao=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><?=$rst['nome_produto']?></div>
+                <div>valor: <?echo $rst['valor_produto']?></div>
+                <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+
+                <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
     </div>
 
 <!-- FIM LISTAR ANUNCIOS -->
-
-
 <!-- CRIAR OU ALTERAR ANUNCIOS -->
 <!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post">
-                <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>  
+                <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
 
-                <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>   
-                
-                
-                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>        
-                
+                <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
+
+
+                <button type="submit" name="<?=(isset($_GET['acaoP']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acaoP']) == 'edit')?('Alterar'):('Cadastrar')?></button>
+
                 <input type="hidden" name="func" value="<?=(isset($produto['pk']))?($objFc->base64($produto['pk'], 1)):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->
 
 </div><!-- FECHA A CONTAINER -->
- 
+
 </body>
 </html>

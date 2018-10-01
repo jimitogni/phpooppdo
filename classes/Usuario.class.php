@@ -5,7 +5,7 @@ include_once "Funcoes.class.php";
 
 //CRIANDO A CLASSE
 class Usuario {
-	
+
 	//ATRIBUTOS
 	private $con;
 	private $objfc;
@@ -31,7 +31,7 @@ class Usuario {
 		return $this->$atributo;
 	}
 	//METODOS
-	
+
 	public function selecionaUm($dado){
 		try{
 			$this->idUsuario = $dado;
@@ -44,7 +44,7 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function selecionaTudo(){
 		try{
 			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nome`, `email`, `data_cadastro` FROM `usuarios`");
@@ -54,7 +54,7 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function insere($dados){
 		try{
 			$this->nome = $this->objfc->tratarCaracter($dados['nome'], 1);
@@ -75,7 +75,7 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function updade($dados){
 		try{
 			$this->idUsuario = $this->objfc->base64($dados['func'], 2);
@@ -94,14 +94,14 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function delete($dado){
 		try{
 			$this->idUsuario = $dado;
 			$cst = $this->con->conectar()->prepare("DELETE FROM `usuarios` WHERE `pk` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			if($cst->execute()){
-				return 'ok';
+				return 1;
 			}else{
 				return 'Erro ao deletar';
 			}
@@ -109,7 +109,7 @@ class Usuario {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function logaUsuario($dados){
 		$this->email = $dados['email'];
 		$this->senha = $dados['senha'];
@@ -133,7 +133,7 @@ class Usuario {
 			return 'Error: '.$e->getMassage();
 		}
 	}
-	
+
 	public function usuarioLogado($dado){
 		$cst = $this->con->conectar()->prepare("SELECT `pk`, `nivel`, `nome`, `email` FROM `usuarios` WHERE `pk` = :idUsuario;");
 		$cst->bindParam(':idUsuario', $dado, PDO::PARAM_INT);
@@ -144,12 +144,12 @@ class Usuario {
 		$_SESSION['pk'] = $rst['pk'];
 		$_SESSION['nivel'] = $rst['nivel'];
 	}
-	
+
 	public function sairusuarios(){
 		session_destroy();
 		header ('location: phpooppdo');
 	}
-	
+
 }
 
 ?>
