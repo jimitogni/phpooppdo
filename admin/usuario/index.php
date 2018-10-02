@@ -51,11 +51,11 @@ if(isset($_POST['btAlterar'])){
 //SELECIONADO O FUNCIONARIO
 if(isset($_GET['acaoU'])){
     switch($_GET['acaoU']){
-        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['pk']); break;
+        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
         case 'delet':
-            if($objUsuario->delete($_GET['pk']) == 1){
-                echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
-                header('location: /admin/usuario');
+            if($objUsuario->delete($_GET['usuario']) == 1){
+                //echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
+                header('location: ');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
             }
