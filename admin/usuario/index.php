@@ -68,7 +68,7 @@ if(isset($_GET['acaoP'])){
     switch($_GET['acaoP']){
         case 'edit': $produto = $objProduto->selecionaUmProduto($_GET['produto']); break;
         case 'delet':
-            if($objProduto->delete($_GET['produto']) == 'ok'){
+            if($objProduto->delete($_GET['produto']) == 1){
                 header('location: ');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';

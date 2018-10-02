@@ -5,7 +5,7 @@ include_once "Funcoes.class.php";
 
 //CRIANDO A CLASSE
 class Produto {
-	
+
 	//ATRIBUTOS
 	private $con;
 	private $objfc;
@@ -33,7 +33,7 @@ class Produto {
 		return $this->$atributo;
 	}
 	//METODOS
-	
+
 	public function selecionaUmProduto($dado){
 		try{
 			$this->idProduto = $dado;
@@ -46,8 +46,8 @@ class Produto {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
-	
+
+
 	public function selecionaTudo(){
 		try{
 			$cst = $this->con->conectar()->prepare("SELECT `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos`");
@@ -58,7 +58,7 @@ class Produto {
 		}
 	}
 
-	
+
 	public function insereProduto($dados){
 		try{
 			$this->nomeProduto = $this->objfc->tratarCaracter($dados['nomeProduto'], 1);
@@ -88,7 +88,7 @@ class Produto {
 		}
 	}
 
-	
+
 	public function updade($dados){
 		try{
 			$this->idUsuario = $this->objfc->base64($dados['func'], 2);
@@ -107,14 +107,14 @@ class Produto {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function delete($dado){
 		try{
 			$this->pkProduto = $dado;
 			$cst = $this->con->conectar()->prepare("DELETE FROM `produtos` WHERE `pk_produto` = :pkProduto;");
 			$cst->bindParam(":pkProduto", $this->pkProduto, PDO::PARAM_INT);
 			if($cst->execute()){
-				return 'ok';
+				return 1;
 			}else{
 				return 'Erro ao deletar';
 			}
@@ -122,7 +122,7 @@ class Produto {
 			return 'Error: '.$e->getMessage();
 		}
 	}
-	
+
 	public function logaUsuario($dados){
 		$this->email = $dados['email'];
 		$this->senha = $dados['senha'];
@@ -146,7 +146,7 @@ class Produto {
 			return 'Error: '.$e->getMassage();
 		}
 	}
-	
+
 	public function usuarioLogado($dado){
 		$cst = $this->con->conectar()->prepare("SELECT `pk`, `nivel`, `nome`, `email` FROM `usuarios` WHERE `pk` = :idUsuario;");
 		$cst->bindParam(':idUsuario', $dado, PDO::PARAM_INT);
@@ -157,12 +157,12 @@ class Produto {
 		$_SESSION['pk'] = $rst['pk'];
 		$_SESSION['nivel'] = $rst['nivel'];
 	}
-	
+
 	public function sairusuarios(){
 		session_destroy();
 		header ('location: phpooppdo');
 	}
-	
+
 }
 
 ?>
