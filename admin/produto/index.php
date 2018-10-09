@@ -7,17 +7,7 @@ require_once "../../classes/Produto.class.php";
 $objProduto = new Produto();
 $objFc = new Funcoes();
 
-//VALIDANDO USUARIO
-session_start();
 
-if($_SESSION["logado"] == "sim"){
-    $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
-}else{
-    header("location: ../../");
-}
-if(isset($_GET['sair']) == "sim"){
-    $objUsuario->usuarioLogado();
-}
 
 /*//CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){

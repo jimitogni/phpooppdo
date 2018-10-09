@@ -1,7 +1,6 @@
 <?php
 //BUSCANDO A CLASSE
 require_once "../../classes/Usuario.class.php";
-require_once "../../classes/Funcoes.class.php";
 
 //ESTANCIANDO A CLASSE
 $objUsuario = new Usuario();
