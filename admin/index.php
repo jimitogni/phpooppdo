@@ -30,17 +30,10 @@ if(isset($_GET['sair']) == "sim"){
 </head>
 
 <body>
-<nav class="navbar navbar-inverse navbar-radius">
-  <div class="container-fluid">
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="usuario">Usuários</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?=$_SESSION['nome']?> nivel de acesso: <?=$_SESSION['nivel']?></a></li>
-      <li><a href="?sair=sim"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
-    </ul>
-  </div>
-</nav>
+<!-- BARRA DE NAVEGACAO -->
+<?php
+require_once "menu/nav.php";
+?>
+<!-- FIM BARRA DE NAVEGACAO -->
 </body>
 </html>
