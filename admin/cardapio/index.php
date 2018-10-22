@@ -38,13 +38,12 @@ if(isset($_POST['btAlterar'])){
     }
 }
 
-//SELECIONADO O FUNCIONARIO
-if(isset($_GET['acaoU'])){
-    switch($_GET['acaoU']){
-        case 'edit': $usuario = $objCardapio->selecionaUm($_GET['usuario']); break;
+//SELECIONADO UM 
+if(isset($_GET['acao'])){
+    switch($_GET['acao']){
+        case 'edit': $cardapio = $objCardapio->selecionaUmCard($_GET['cardapio']); break;
         case 'delet':
-            if($objCardapio->delete($_GET['usuario']) == 1){
-                //echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
+            if($objCardapio->delete($_GET['cardapio']) == 1){
                 header('location: ');
             }else{
                 echo '<script type="text/javascript">alert("Erro em deletar");</script>';
@@ -53,19 +52,6 @@ if(isset($_GET['acaoU'])){
     }
 }
 
-//SELECIONADO UM PRODUTO OU ANUNCI
-if(isset($_GET['acaoP'])){
-    switch($_GET['acaoP']){
-        case 'edit': $produto = $objCardapio->selecionaUmProduto($_GET['produto']); break;
-        case 'delet':
-            if($objCardapio->delete($_GET['produto']) == 1){
-                header('location: ');
-            }else{
-                echo '<script type="text/javascript">alert("Erro em deletar");</script>';
-            }
-                break;
-    }
-}
 
 ?>
 <!DOCTYPE HTML>
@@ -85,7 +71,7 @@ if(isset($_GET['acaoP'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-include_once "../menu/nav.php";
+//include_once "../menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 <!-- FIM BARRA DE NAVEGACAO -->
@@ -100,14 +86,14 @@ include_once "../menu/nav.php";
 <div class="row">
     <div class="col-6">
         <div class="border bg-light panel panel-primary list-group">
-        <h3>Lista Anuncios</h3>
+        <h3>Lista de Cardápios</h3>
             <?php foreach($objCardapio->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
-                <div><?=$rst['nome_produto']?></div>
-                <div>valor: <?echo $rst['valor_produto']?></div>
-                <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div><?=$rst['nome_cardapio']?></div>
+                <div>valor: <?echo $rst['valor_cardapio']?></div>
+                <div><a href="?acaoP=edit&cardapio=<?=$rst['pk_cardapio']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
-                <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acaoP=delet&cardapio=<?=$rst['pk_cardapio']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
@@ -118,20 +104,20 @@ include_once "../menu/nav.php";
 <!-- FORMULARIO PARA CRIAR -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post">
-                <input class="form-control" name="tituloCard" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>
+                <input class="form-control" name="tituloCard" type="text" required="required"  placeholder="Titulo do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['tituloCard']))?($cardapio['tituloCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="itensCard" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
+                <input class="form-control" name="itensCard" type="text" required="required"  placeholder="Itens do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['itensCard']))?($cardapio['itensCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="descricaoCard" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
+                <input class="form-control" name="descricaoCard" type="text" required="required"  placeholder="Descricao do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['descricaoCard']))?($cardapio['descricaoCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="dataCard" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
+                <input class="form-control" name="dataCard" type="text" required="required"  placeholder="Data do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['dataCard']))?($cardapio['dataCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="publicadoCard" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
+                <input class="form-control" name="publicadoCard" type="text" required="required"  placeholder="Publicado ou não:" value="<?=$objFc->tratarCaracter((isset($cardapio['publicadoCard']))?($cardapio['publicadoCard']):(''), 2)?>"><br>
 
 
-                <button type="submit" name="<?=(isset($_GET['acaoP']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acaoP']) == 'edit')?('Alterar'):('Cadastrar')?></button>
+                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterarcardapio'):('btCadastrarcardapio')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>
 
-                <input type="hidden" name="func" value="<?=(isset($produto['pk']))?($objFc->base64($produto['pk'], 1)):('')?>">
+                <input type="hidden" name="func" value="<?=(isset($cardapio['pk']))?($objFc->base64($cardapio['pk'], 1)):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->

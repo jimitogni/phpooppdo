@@ -57,7 +57,7 @@ class Cardapio {
 	}
 
 
-	public function insereProduto($dados){
+	public function insere($dados){
 		try{
 			$this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);
 			$this->itensCard = $this->objfc->tratarCaracter($dados['itensCard'], 1);
