@@ -1,7 +1,7 @@
 <?php
 //BUSCANDO A CLASSE
-require_once "/phpooppdo/classes/Usuario.class.php";
-require_once "/phpooppdo/classes/Funcoes.class.php";
+include_once "../classes/Usuario.class.php";
+include_once "../classes/Funcoes.class.php";
 
 //ESTANCIANDO A CLASSE
 $objUsuario = new Usuario();
@@ -37,12 +37,12 @@ if(isset($_GET['sair']) == "sim"){
 <a class="navbar-brand" href="#">LOGO</a>
     <ul class="navbar-nav mr-auto">
       <li><a class="nav-link nav-item" href="../">Home</a></li>
-      <li><a class="nav-link nav-item" href="../usuario">Usuario</a></li>
-      <li><a class="nav-link nav-item" href="../produto">Produtos</a></li>
-      <li><a class="nav-link nav-item" href="../receita">Receita</a></li>
-      <li><a class="nav-link nav-item" href="../video">Video</a></li>
-      <li><a class="nav-link nav-item" href="../cardapio">Cardápio</a></li>
-      <li><a class="nav-link nav-item" href="../evento">Evento</a></li>
+      <li><a class="nav-link nav-item" href="../admin/usuario">Usuario</a></li>
+      <li><a class="nav-link nav-item" href="../admin/produto">Produtos</a></li>
+      <li><a class="nav-link nav-item" href="../admin/receita">Receita</a></li>
+      <li><a class="nav-link nav-item" href="../admin/video">Video</a></li>
+      <li><a class="nav-link nav-item" href="../admin/cardapio">Cardápio</a></li>
+      <li><a class="nav-link nav-item" href="../admin/evento">Evento</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?=$_SESSION['email']?></a></li>
