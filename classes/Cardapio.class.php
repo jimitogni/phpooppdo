@@ -65,7 +65,7 @@ class Cardapio {
       		$this->dataCard = $this->$dados['dataCard'];
       		$this->publicadoCard = $this->$dados['publicadoCard'];
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `publicadoCard`) VALUES (:tituloReceita, :publicadaReceita, :preparoReceita, :ingredientesReceita, :dataReceita);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `publicadoCard`) VALUES (:tituloCard, :itensCard, :descricaoCard, :dataCard, :publicadoCard);");
 
 			$cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
 			$cst->bindParam(":itensCard", $this->itensCard, PDO::PARAM_STR);

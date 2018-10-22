@@ -22,8 +22,9 @@ if(isset($_GET['sair']) == "sim"){
 
 //CADASTRANDO
 if(isset($_POST['btCadastrar'])){
-    if($objCardapio->insere($_POST) == 'ok'){
+    if($objCardapio->insere($_POST) == 1){
         header('location: ');
+        echo '<script type="text/javascript">alert("DEU CERTO");</script>';
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
     }
