@@ -46,7 +46,7 @@ if(isset($_GET['acaoP'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../menu/nav.php";
+//require_once "../menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 
@@ -75,13 +75,14 @@ require_once "../menu/nav.php";
 <!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post" enctype="multipart/form-data">
+                
                 <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
 
-                <input class="form-control" name="foto" type="file"><br>
+                <input type="file" name="foto111" ><br>
 
 
 
