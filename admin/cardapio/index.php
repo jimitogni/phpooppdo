@@ -3,7 +3,7 @@
 require_once "../../classes/Cardapio.class.php";
 include_once "../../classes/Funcoes.class.php";
 
-//ESTANCIANDO A CLASSE
+//Instanciando A CLASSE
 $objCardapio = new Cardapio();
 $objFc = new Funcoes();
 
@@ -18,7 +18,6 @@ if($_SESSION["logado"] == "sim"){
 if(isset($_GET['sair']) == "sim"){
     $objCardapio->usuarioLogado();
 }
-
 
 //CADASTRANDO
 if(isset($_POST['btCadastrar'])){
@@ -113,12 +112,20 @@ if(isset($_GET['acao'])){
 
                 <input class="form-control" name="dataCard" type="text" required="required"  placeholder="Data do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['dataCard']))?($cardapio['dataCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="publicadoCard" type="text" required="required"  placeholder="Publicado ou não:" value="<?=$objFc->tratarCaracter((isset($cardapio['publicadoCard']))?($cardapio['publicadoCard']):(''), 2)?>"><br>
+                <h5>Publicado:</h5>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                  <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                  <label class="form-check-label" for="inlineCheckbox2">Não</label>
+                </div>
 
 
-                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterarcardapio'):('btCadastrarcardapio')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>
+                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>
 
-                <input type="hidden" name="func" value="<?=(isset($cardapio['pk']))?($objFc->base64($cardapio['pk'], 1)):('')?>">
+                <input type="hidden" name="func" value="<?=(isset($cardapio['idCard']))?($objFc->base64($cardapio['idCard'], 1)):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->

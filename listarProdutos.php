@@ -34,7 +34,7 @@ $objFc = new Funcoes();
             <div>valor: <?echo $rst['valor_produto']?></div>
             <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
-            <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+            <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="<?=$rst['urlimagem']?>" width="16" height="16" alt="Excluir"></a></div>
         </div>
         <?php } ?>
     </div>
