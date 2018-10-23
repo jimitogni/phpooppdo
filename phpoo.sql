@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 22-Out-2018 às 21:00
+-- Generation Time: 23-Out-2018 às 21:39
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -46,16 +46,17 @@ CREATE TABLE `produtos` (
   `descricao_produto` varchar(20) NOT NULL,
   `valor_produto` float NOT NULL,
   `pk_produto` int(11) NOT NULL,
-  `publicado` int(2) NOT NULL
+  `publicado` int(2) NOT NULL,
+  `urlimagem` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `produtos`
 --
 
-INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `pk_produto`, `publicado`) VALUES
-('hquefhauefh', 'ehfuahfuah', 333, 8, 0),
-('produto 1', 'produto 1', 9999, 10, 0);
+INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `pk_produto`, `publicado`, `urlimagem`) VALUES
+('hquefhauefh', 'ehfuahfuah', 333, 8, 0, ''),
+('produto 1', 'produto 1', 9999, 10, 0, '');
 
 -- --------------------------------------------------------
 
