@@ -89,8 +89,8 @@ if(isset($_GET['acao'])){
         <h3>Lista de Cardápios</h3>
             <?php foreach($objCardapio->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
-                <div><?=$rst['nome_cardapio']?></div>
-                <div>valor: <?echo $rst['valor_cardapio']?></div>
+                <div><?=$rst['tituloCard']?></div>
+                <div>valor: <?echo $rst['descricaoCard']?></div>
                 <div><a href="?acaoP=edit&cardapio=<?=$rst['pk_cardapio']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
                 <div><a href="?acaoP=delet&cardapio=<?=$rst['pk_cardapio']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
@@ -108,18 +108,18 @@ if(isset($_GET['acao'])){
 
                 <input class="form-control" name="itensCard" type="text" required="required"  placeholder="Itens do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['itensCard']))?($cardapio['itensCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="descricaoCard" type="text" required="required"  placeholder="Descricao do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['descricaoCard']))?($cardapio['descricaoCard']):(''), 2)?>"><br>
+                <input class="form-control" name="descricaoCard" type="text" placeholder="Descricao do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['descricaoCard']))?($cardapio['descricaoCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="dataCard" type="text" required="required"  placeholder="Data do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['dataCard']))?($cardapio['dataCard']):(''), 2)?>"><br>
+                <input class="form-control" name="dataCard" type="text" placeholder="Data do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['dataCard']))?($cardapio['dataCard']):(''), 2)?>"><br>
 
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                  <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+                  <input class="form-check-input" type="checkbox" name="publicadoCard" id="publicadoCard" value="1">
+                  <label class="form-check-label" for="publicadoCard">Sim</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                  <label class="form-check-label" for="inlineCheckbox2">Não</label>
+                  <input class="form-check-input" name="publicadoCard" type="checkbox" id="publicadoCard" value="2">
+                  <label class="form-check-label" for="publicadoCard">Não</label>
                 </div>
 
 

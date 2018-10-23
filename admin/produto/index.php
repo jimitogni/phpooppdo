@@ -3,20 +3,9 @@
 require_once "../../classes/Funcoes.class.php";
 require_once "../../classes/Produto.class.php";
 
-//ESTANCIANDO A CLASSE
 $objProduto = new Produto();
 $objFc = new Funcoes();
 
-
-
-/*//CADASTRANDO O FUNCIONARIO
-if(isset($_POST['btCadastrar'])){
-    if($objUsuario->insere($_POST) == 'ok'){
-        header('location: ');
-    }else{
-        echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
-    }
-}*/
 
 //CADASTRANDO O Produto
 if(isset($_POST['btCadastrarProduto'])){
@@ -26,30 +15,6 @@ if(isset($_POST['btCadastrarProduto'])){
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
     }
 }
-
-/*//ALTERANDO OS DADOS DO FUNCIONARIO
-if(isset($_POST['btAlterar'])){
-    if($objUsuario->updade($_POST) == 'ok'){
-        header('location: ?acao=edit&usuario='.$_GET['usuario']);
-    }else{
-        echo '<script type="text/javascript">alert("Erro em atualizar");</script>';
-    }
-}*/
-
-/*//SELECIONADO O FUNCIONARIO
-if(isset($_GET['acaoU'])){
-    switch($_GET['acaoU']){
-        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
-        case 'delet':
-            if($objUsuario->delete($_GET['usuario']) == 1){
-                //echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
-                header('location: ');
-            }else{
-                echo '<script type="text/javascript">alert("Erro em deletar");</script>';
-            }
-                break;
-    }
-}*/
 
 //SELECIONADO UM PRODUTO OU ANUNCI
 if(isset($_GET['acaoP'])){
@@ -109,12 +74,16 @@ require_once "../menu/nav.php";
 <!-- CRIAR OU ALTERAR ANUNCIOS -->
 <!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
     <div class="panel panel-primary list-group col-6 border bg-light">
-            <form name="formCad" action="" method="post">
+            <form name="formCad" action="" method="post" enctype="multipart/form-data">
                 <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
+
+                <input class="form-control" name="foto" type="file"><br>
+
+
 
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">

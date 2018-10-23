@@ -60,18 +60,18 @@ class Cardapio {
 	public function insere($dados){
 		try{
 			$this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);
-			$this->itensCard = $this->objfc->tratarCaracter($dados['itensCard'], 1);
+			$this->itensCard = $dados['itensCard'];
 			$this->descricaoCard = $this->objfc->tratarCaracter($dados['descricaoCard'], 1);
-      		$this->dataCard = $this->$dados['dataCard'];
-      		$this->publicadoCard = $this->$dados['publicadoCard'];
+      		$this->dataCard = $dados['dataCard'];
+      		//$this->publicadoCard = $dados['publicadoCard'];
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `publicadoCard`) VALUES (:tituloCard, :itensCard, :descricaoCard, :dataCard, :publicadoCard);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`) VALUES (:tituloCard, :itensCard, :descricaoCard, :dataCard);");
 
 			$cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
 			$cst->bindParam(":itensCard", $this->itensCard, PDO::PARAM_STR);
 			$cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
-			$cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
-			$cst->bindParam(":dataReceita", $this->dataReceita, PDO::PARAM_STR);
+			//$cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
+			$cst->bindParam(":dataCard", $this->dataCard, PDO::PARAM_STR);
 
 			if($cst->execute()){
 				return 1;
@@ -90,8 +90,8 @@ class Cardapio {
       $this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);
 	  $this->itensCard = $this->objfc->tratarCaracter($dados['preparoReceita'], 1);
 	  $this->descricaoCard = $this->objfc->tratarCaracter($dados['descricaoCard'], 1);
-      $this->dataCard = $this->$dados['dataCard'];
-      $this->publicadoCard = $this->$dados['publicadoCard'];
+      $this->dataCard = $dados['dataCard'];
+      $this->publicadoCard = $dados['publicadoCard'];
 
       $cst = $this->con->conectar()->prepare("UPDATE `cardapio` SET `tituloCard`=:tituloCard, `itensCard`=:itensCard, `descricaoCard`=:descricaoCard, `dataCard`=:dataCard, `publicadoCard`=:publicadoCard WHERE `idCard`=:idCard;");
 
