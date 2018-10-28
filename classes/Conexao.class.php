@@ -11,10 +11,10 @@ class Conexao{
 
 	//CONSTRUTOR
 	public function __construct(){
-		$this->servidor = "localhost";
+		$this->servidor = "192.168.0.10:3306";
 		$this->banco = "phpoo";
-		$this->usuario = "root";
-		$this->senha = "";
+		$this->usuario = "jimi";
+		$this->senha = "341322";
 	}
 
 	//METODO PARA CONECTAR
