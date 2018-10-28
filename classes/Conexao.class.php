@@ -11,7 +11,7 @@ class Conexao{
 
 	//CONSTRUTOR
 	public function __construct(){
-		$this->servidor = "192.168.0.10:3306";
+		$this->servidor = "localhost";
 		$this->banco = "phpoo";
 		$this->usuario = "jimi";
 		$this->senha = "341322";
