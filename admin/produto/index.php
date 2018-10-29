@@ -1,7 +1,7 @@
 <?php
 //BUSCANDO A CLASSE
-require_once "../../../phpoopdo/classes/Funcoes.class.php";
-require_once "../../../phpoopdo/classes/Produto.class.php";
+require_once '../../classes/Funcoes.class.php';
+require_once '../../classes/Produto.class.php';
 
 $objProduto = new Produto();
 $objFc = new Funcoes();
@@ -40,13 +40,13 @@ if(isset($_GET['acaoP'])){
     <!-- bootstrap atual -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+
 </head>
 <body>
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../../../phpoopdo/admin/menu/nav.php";
+require_once "../../admin/menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 
@@ -77,7 +77,7 @@ require_once "../../../phpoopdo/admin/menu/nav.php";
 <!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post" enctype="multipart/form-data">
-                
+
                 <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>

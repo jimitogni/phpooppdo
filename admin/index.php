@@ -1,7 +1,7 @@
 <?php
 //BUSCANDO AS CLASSES
-include_once "../../phpoopdo/classes/Usuario.class.php";
-//ESTANCIANDO 
+include_once "../classes/Usuario.class.php";
+//ESTANCIANDO
 $objFunc = new Usuario();
 //VALIDANDO USUARIO
 session_start();
@@ -9,7 +9,7 @@ session_start();
 if($_SESSION["logado"] == "sim"){
 	$objFunc->usuarioLogado($_SESSION['pk']);
 }else{
-	header("location: /phpoopdo/"); 
+	header("location: /phpoopdo/");
 }
 
 if(isset($_GET['sair']) == "sim"){
@@ -27,13 +27,13 @@ if(isset($_GET['sair']) == "sim"){
 	<!-- bootstrap atual -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+
 </head>
 
 <body>
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../../phpoopdo/admin/menu/nav.php";
+require_once "../admin/menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 </body>

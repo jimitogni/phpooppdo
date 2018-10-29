@@ -13,13 +13,13 @@
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
 <a class="navbar-brand" href="#">LOGO</a>
     <ul class="navbar-nav mr-auto">
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/">Home</a></li>
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/usuario">Usuario</a></li>
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/produto">Produtos</a></li>
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/receita">Receita</a></li>
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/video">Video</a></li>
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/cardapio">Cardápio</a></li>
-      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/evento">Evento</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/">Home</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/usuario">Usuario</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/produto">Produtos</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/receita">Receita</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/video">Video</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/cardapio">Cardápio</a></li>
+      <li><a class="nav-link nav-item" href="/phpooppdo/admin/evento">Evento</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?=$_SESSION['email']?></a></li>
