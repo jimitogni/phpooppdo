@@ -1,6 +1,6 @@
 <?php
 //BUSCANDO AS CLASSES
-require_once '../classes/Usuario.class.php';
+include_once "../../phpoopdo/classes/Usuario.class.php";
 //ESTANCIANDO 
 $objFunc = new Usuario();
 //VALIDANDO USUARIO
@@ -33,7 +33,7 @@ if(isset($_GET['sair']) == "sim"){
 <body>
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "menu/nav.php";
+require_once "../../phpoopdo/admin/menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 </body>

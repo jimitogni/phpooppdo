@@ -1,25 +1,3 @@
-<?php
-//BUSCANDO A CLASSE
-include_once "../classes/Usuario.class.php";
-include_once "../classes/Funcoes.class.php";
-
-//ESTANCIANDO A CLASSE
-$objUsuario = new Usuario();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARIO
-session_start();
-
-if($_SESSION["logado"] == "sim"){
-    $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
-}else{
-    header("location: ../../");
-}
-if(isset($_GET['sair']) == "sim"){
-    $objUsuario->usuarioLogado();
-}
-?>
-
 <!DOCTYPE HTML>
 <html lang="pt-br">
 <head>
@@ -35,13 +13,13 @@ if(isset($_GET['sair']) == "sim"){
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
 <a class="navbar-brand" href="#">LOGO</a>
     <ul class="navbar-nav mr-auto">
-      <li><a class="nav-link nav-item" href="../">Home</a></li>
-      <li><a class="nav-link nav-item" href="../admin/usuario">Usuario</a></li>
-      <li><a class="nav-link nav-item" href="../admin/produto">Produtos</a></li>
-      <li><a class="nav-link nav-item" href="../admin/receita">Receita</a></li>
-      <li><a class="nav-link nav-item" href="../admin/video">Video</a></li>
-      <li><a class="nav-link nav-item" href="../admin/cardapio">Cardápio</a></li>
-      <li><a class="nav-link nav-item" href="../admin/evento">Evento</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/">Home</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/usuario">Usuario</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/produto">Produtos</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/receita">Receita</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/video">Video</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/cardapio">Cardápio</a></li>
+      <li><a class="nav-link nav-item" href="/php/phpoopdo/admin/evento">Evento</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> <?=$_SESSION['email']?></a></li>

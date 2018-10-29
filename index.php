@@ -19,29 +19,30 @@ if(isset($_POST['btLogar'])){
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
-
 <body>
-	<div id="areaLogin">
-    	<form action="" method="post">
-        	<div class="form-group">
-            	<div class="input-group">
-                	<span class="input-group-addon">@</span>
-                	<input type="text" name="email" class="form-control" placeholder="E-mail" required="required">
-              	</div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
-                    <input type="password" name="senha" class="form-control" placeholder="Senha">
-                </div> 
-            </div>
-            <div class="form-group">
-            	<button type="submit" name="btLogar" class="btn btn-primary btn-block">Logar</button> 
-            </div>
-        </form>
-        <?php if(isset($_GET["login"]) == "error"){ ?>
+
+    <div class="container text-center">
+
+      <form class="form-signin" action="" method="post">
+        <h2 class="form-signin-heading">Faça o login para acessar a área administrativa</h2>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input type="text" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+        <label for="inputPassword" class="sr-only">Senha</label>
+        <input type="password" name="senha" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Lembrar
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" name="btLogar" type="submit">Entrar</button>
+      </form>
+
+       <?php if(isset($_GET["login"]) == "error"){ ?>
         <div class="alert alert-danger alert-block alert-aling" role="alert">Ops! E-mail ou Senha estão errado</div>
         <?php } ?>
-	</div>
+
+    </div> <!-- /container -->
+
+
 </body>
 </html>

@@ -70,7 +70,7 @@ if(isset($_GET['acao'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-//include_once "../menu/nav.php";
+require_once "../../../phpoopdo/admin/menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 <!-- FIM BARRA DE NAVEGACAO -->

@@ -1,7 +1,7 @@
 <?php
 //BUSCANDO A CLASSE
-require_once "../../classes/Funcoes.class.php";
-require_once "../../classes/Produto.class.php";
+require_once "../../../phpoopdo/classes/Funcoes.class.php";
+require_once "../../../phpoopdo/classes/Produto.class.php";
 
 $objProduto = new Produto();
 $objFc = new Funcoes();
@@ -46,12 +46,14 @@ if(isset($_GET['acaoP'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-//require_once "../menu/nav.php";
+require_once "../../../phpoopdo/admin/menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 
 <!-- espaço -->
 <br> <br>
+
+<div class="container">
 
 <!-- LISTAR ANUNCIOS -->
 <div class="row">
