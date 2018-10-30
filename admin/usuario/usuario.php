@@ -1,26 +1,4 @@
 <?php
-#arquivo de configurações
-require_once 'config/config.php';
-
-//BUSCANDO AS CLASSES
-require_once DIRCLASS. 'Usuario.class.php';
-
-// CLASSE
-$objUsuario = new Usuario();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARIO
-session_start();
-
-if($_SESSION["logado"] == "sim"){
-    $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
-}else{
-    header("location: ../../");
-}
-if(isset($_GET['sair']) == "sim"){
-    $objUsuario->usuarioLogado();
-}
-
 //CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){
     if($objUsuario->insere($_POST) == 'ok'){
@@ -68,7 +46,7 @@ if(isset($_GET['acaoU'])){
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+
 </head>
 <body>
 

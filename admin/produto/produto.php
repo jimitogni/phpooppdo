@@ -1,11 +1,9 @@
 <?php
 //BUSCANDO A CLASSE
-require_once '../../classes/Funcoes.class.php';
-require_once '../../classes/Produto.class.php';
+require_once DIRCLASS. 'Funcoes.class.php';
+require_once DIRCLASS. 'Produtos.class.php';
 
 $objProduto = new Produto();
-$objFc = new Funcoes();
-
 
 //CADASTRANDO O Produto
 if(isset($_POST['btCadastrarProduto'])){

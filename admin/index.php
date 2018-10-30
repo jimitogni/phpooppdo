@@ -4,29 +4,23 @@ require_once '../config/config.php';
 
 //BUSCANDO AS CLASSES
 require_once DIRCLASS. 'Usuario.class.php';
+require_once DIRCLASS. 'Funcoes.class.php';
 
-echo DIRCLASS. 'Usuario.class.php';
-
-//CLASSE
+//Instanciando
 $objUsuario = new Usuario();
-
-//$objFunc->imprime();
-//$objFunc->usuarioLogado($_SESSION['pk']);
-
-//isntanciando
-$objFunc = new Usuario();
+$objFc = new Funcoes();
 
 //VALIDANDO USUARI'
 session_start();
 
 if($_SESSION["logado"] == "sim"){
-	$objFunc->usuarioLogado($_SESSION['pk']);
+	$objUsuario->usuarioLogado($_SESSION['pk']);
 }else{
 	header("location: ".DIRROOT);
 }
 
 if(isset($_GET['sair']) == "sim"){
-	$objFunc->sairusuarios();
+	$objUsuario->sairusuarios();
 }
 
 ?>
@@ -56,22 +50,22 @@ require_once DIRNAV . 'nav.php';
 <?php
 
 if ($_GET['pg']=='usuario'){
-	require_once DIRADMIN . 'usuario.php';
+	require_once DIRADMIN . 'usuario/usuario.php';
 }
 elseif ($_GET['pg']=='produto'){
-	require_once DIRADMIN . 'produto.php';
+	require_once DIRADMIN . 'produto/produto.php';
 }
 elseif ($_GET['pg']=='receita'){
-	require_once DIRADMIN . 'receita.php';
+	require_once DIRADMIN . 'receita/receita.php';
 }
 elseif ($_GET['pg']=='video'){
-	require_once DIRADMIN . 'video.php';
+	require_once DIRADMIN . 'video/video.php';
 }
 elseif ($_GET['pg']=='evento'){
-	require_once DIRADMIN . 'evento.php';
+	require_once DIRADMIN . 'evento/evento.php';
 }
 elseif ($_GET['pg']=='cardapio'){
-	require_once DIRADMIN . 'cardapio.php';
+	require_once DIRADMIN . 'cardapio/cardapio.php';
 }else{
 	require_once DIRADMIN;
 }

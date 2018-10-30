@@ -6,6 +6,10 @@ require_once 'config/config.php';
 //BUSCANDO AS CLASSES
 require_once DIRCLASS. 'Usuario.class.php';
 
+//echo "<br><br> inserindo classe ususario<br>";
+//echo DIRCLASS. 'Usuario.class.php';
+//echo "<br><br>";
+
 //CLASSES
 $objFunc = new Usuario();
 
@@ -14,10 +18,10 @@ if(isset($_POST['btLogar'])){
 	$objFunc->logaUsuario($_POST);
 }
 
-echo DIRROOT. "<br>";
-echo DIRADMIN. "<br>";
-echo DIRCLASS. "<br>";
-echo DIRNAV. "<br>";
+//echo DIRROOT. "<br>";
+//echo DIRADMIN. "<br>";
+//echo DIRCLASS. "<br>";
+//echo DIRNAV. "<br>";
 
 
 ?>

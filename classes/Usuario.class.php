@@ -3,7 +3,7 @@
 include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
 
-echo "teste include";
+//echo "teste include dentro da classe";
 //CRIANDO A CLASSE
 class Usuario {
 
@@ -126,7 +126,7 @@ class Usuario {
 			$cst->bindParam(':senha', $this->senha, PDO::PARAM_STR);
 			$cst->execute();
 			if($cst->rowCount() == 0){
-				header('location: index.php?login=error');
+				header('location: erro.php');
 			}else{
 				session_start();
 				$rst = $cst->fetch();
@@ -134,7 +134,7 @@ class Usuario {
 				$_SESSION['email'] = $rst['email'];
 				$_SESSION['pk'] = $rst['pk'];
 				$_SESSION['nivel'] = $rst['nivel'];
-				header("location: admin");
+				header('location: admin');
 			}
 		}catch(PDOException $e){
 			return 'Error: '.$e->getMassage();
