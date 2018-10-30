@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb4
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 23-Out-2018 às 21:39
--- Versão do servidor: 10.1.13-MariaDB
--- PHP Version: 7.0.8
+-- Host: localhost:3306
+-- Tempo de geração: 28/10/2018 às 23:27
+-- Versão do servidor: 10.1.26-MariaDB-0+deb9u1
+-- Versão do PHP: 7.0.30-0+deb9u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `phpoo`
+-- Banco de dados: `phpoo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cardapio`
+-- Estrutura para tabela `cardapio`
 --
 
 CREATE TABLE `cardapio` (
@@ -38,7 +38,7 @@ CREATE TABLE `cardapio` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `produtos`
+-- Estrutura para tabela `produtos`
 --
 
 CREATE TABLE `produtos` (
@@ -51,7 +51,7 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `produtos`
+-- Fazendo dump de dados para tabela `produtos`
 --
 
 INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `pk_produto`, `publicado`, `urlimagem`) VALUES
@@ -61,7 +61,7 @@ INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `p
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `receita`
+-- Estrutura para tabela `receita`
 --
 
 CREATE TABLE `receita` (
@@ -74,7 +74,7 @@ CREATE TABLE `receita` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -87,18 +87,18 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Fazendo dump de dados para tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`) VALUES
-(11, 'jimi2', 'jimi@jimi.com', '2018-08-27', '1234', 0),
+(11, '1', '1', '2018-08-27', '1', 0),
 (16, 'teste', 'teste@teste.com', '2018-10-01', '29a2c3d7a6b729c3db4bb4a57f7bfff7d6679119', 0),
 (17, 'Jimi Togni', 'ana@ana.com', '2018-10-01', '72019bbac0b3dac88beac9ddfef0ca808919104f', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `videos`
+-- Estrutura para tabela `videos`
 --
 
 CREATE TABLE `videos` (
@@ -109,65 +109,65 @@ CREATE TABLE `videos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `cardapio`
+-- Índices de tabela `cardapio`
 --
 ALTER TABLE `cardapio`
   ADD PRIMARY KEY (`idCard`);
 
 --
--- Indexes for table `produtos`
+-- Índices de tabela `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`pk_produto`);
 
 --
--- Indexes for table `receita`
+-- Índices de tabela `receita`
 --
 ALTER TABLE `receita`
   ADD PRIMARY KEY (`idreceira`);
 
 --
--- Indexes for table `usuarios`
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`pk`);
 
 --
--- Indexes for table `videos`
+-- Índices de tabela `videos`
 --
 ALTER TABLE `videos`
   ADD PRIMARY KEY (`idvideo`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `cardapio`
+-- AUTO_INCREMENT de tabela `cardapio`
 --
 ALTER TABLE `cardapio`
   MODIFY `idCard` int(2) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `produtos`
+-- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
   MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
--- AUTO_INCREMENT for table `receita`
+-- AUTO_INCREMENT de tabela `receita`
 --
 ALTER TABLE `receita`
   MODIFY `idreceira` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
--- AUTO_INCREMENT for table `videos`
+-- AUTO_INCREMENT de tabela `videos`
 --
 ALTER TABLE `videos`
   MODIFY `idvideo` int(5) NOT NULL AUTO_INCREMENT;

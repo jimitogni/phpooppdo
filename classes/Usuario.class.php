@@ -3,8 +3,10 @@
 include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
 
+echo "teste include";
 //CRIANDO A CLASSE
 class Usuario {
+
 
 	//ATRIBUTOS
 	private $con;
@@ -31,6 +33,11 @@ class Usuario {
 		return $this->$atributo;
 	}
 	//METODOS
+
+	public function imprime(){
+		return '<br> teste teste <br> teste <br>';
+		//echo '<br> teste teste <br> teste <br>';
+	}
 
 	public function selecionaUm($dado){
 		try{

@@ -1,23 +1,37 @@
 <?php
+#arquivo de configurações
+require_once '../config/config.php';
+
 //BUSCANDO AS CLASSES
-include_once "../../phpoopdo/classes/Usuario.class.php";
-//ESTANCIANDO 
-$objFunc = new Usuario();
+require_once DIRCLASS. 'Usuario.class.php';
+
+echo DIRCLASS. 'Usuario.class.php';
+
+//CLASSE
+$objUsuario = new Usuario();
+
+$objFunc->imprime();
+
+//$objFunc->usuarioLogado($_SESSION['pk']);
+
+
+/* 
 //VALIDANDO USUARIO
 session_start();
 
 if($_SESSION["logado"] == "sim"){
 	$objFunc->usuarioLogado($_SESSION['pk']);
 }else{
-	header("location: /phpoopdo/"); 
+	header("location: ".DIRROOT); 
 }
 
 if(isset($_GET['sair']) == "sim"){
 	$objFunc->sairusuarios();
 
 
-}
+}*/
 ?>
+
 <!DOCTYPE HTML>
 <html lang="pt-br">
 <head>
@@ -33,7 +47,7 @@ if(isset($_GET['sair']) == "sim"){
 <body>
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../../phpoopdo/admin/menu/nav.php";
+require_once DIRNAV . 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 </body>

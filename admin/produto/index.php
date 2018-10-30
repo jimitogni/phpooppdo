@@ -84,7 +84,7 @@ require_once "../../../phpoopdo/admin/menu/nav.php";
 
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
 
-                <input type="file" name="foto111" ><br>
+                <input type="file" name="foto111" ><br><br>
 
 
 

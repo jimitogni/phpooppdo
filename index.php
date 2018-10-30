@@ -1,13 +1,28 @@
 <?php
+
+#arquivo de configurações
+require_once 'config/config.php';
+
 //BUSCANDO AS CLASSES
-require_once 'classes/Usuario.class.php';
-//ESTANCIANDO A CLASSES
+require_once DIRCLASS. 'Usuario.class.php';
+
+//CLASSES
 $objFunc = new Usuario();
+
 //FAZENDO O LOGIN
 if(isset($_POST['btLogar'])){
 	$objFunc->logaUsuario($_POST);
 }
+
+echo DIRROOT. "<br>";
+echo DIRADMIN. "<br>";
+echo DIRCLASS. "<br>";
+echo DIRNAV. "<br>";
+
+
 ?>
+
+
 <!DOCTYPE HTML>
 <html lang="pt-br">
 <head>
@@ -16,6 +31,7 @@ if(isset($_POST['btLogar'])){
 
 <!-- bootstrap atual -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 </head>
