@@ -10,8 +10,7 @@ echo DIRCLASS. 'Usuario.class.php';
 //CLASSE
 $objUsuario = new Usuario();
 
-$objFunc->imprime();
-
+//$objFunc->imprime();
 //$objFunc->usuarioLogado($_SESSION['pk']);
 
 //isntanciando
@@ -54,7 +53,32 @@ require_once DIRNAV . 'nav.php';
 
 <!-- Conteúdo -->
 
+<?php
 
+if ($_GET['pg']=='usuario'){
+	require_once DIRADMIN . 'usuario.php';
+}
+elseif ($_GET['pg']=='produto'){
+	require_once DIRADMIN . 'produto.php';
+}
+elseif ($_GET['pg']=='receita'){
+	require_once DIRADMIN . 'receita.php';
+}
+elseif ($_GET['pg']=='video'){
+	require_once DIRADMIN . 'video.php';
+}
+elseif ($_GET['pg']=='evento'){
+	require_once DIRADMIN . 'evento.php';
+}
+elseif ($_GET['pg']=='cardapio'){
+	require_once DIRADMIN . 'cardapio.php';
+}else{
+	require_once DIRADMIN;
+}
+
+
+
+?>
 
 <!-- Conteúdo -->
 
