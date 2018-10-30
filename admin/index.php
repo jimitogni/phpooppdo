@@ -67,7 +67,7 @@ elseif ($_GET['pg']=='evento'){
 elseif ($_GET['pg']=='cardapio'){
 	require_once DIRADMIN . 'cardapio/cardapio.php';
 }else{
-	require_once DIRADMIN;
+	echo '<p><h1 class="center form-signin-heading"> Área administrativa </h1></p>';
 }
 
 

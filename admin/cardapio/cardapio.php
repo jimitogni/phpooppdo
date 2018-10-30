@@ -1,23 +1,8 @@
 <?php
 //BUSCANDO A CLASSE
-require_once "../../classes/Cardapio.class.php";
-include_once "../../classes/Funcoes.class.php";
+require_once DIRCLASS. 'Cardapio.class.php';
 
-//Instanciando A CLASSE
 $objCardapio = new Cardapio();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARIO
-session_start();
-
-if($_SESSION["logado"] == "sim"){
-    $objCardapio->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
-}else{
-    header("location: ../../");
-}
-if(isset($_GET['sair']) == "sim"){
-    $objCardapio->usuarioLogado();
-}
 
 //CADASTRANDO
 if(isset($_POST['btCadastrar'])){
@@ -38,7 +23,7 @@ if(isset($_POST['btAlterar'])){
     }
 }
 
-//SELECIONADO UM 
+//SELECIONADO UM
 if(isset($_GET['acao'])){
     switch($_GET['acao']){
         case 'edit': $cardapio = $objCardapio->selecionaUmCard($_GET['cardapio']); break;
@@ -54,26 +39,6 @@ if(isset($_GET['acao'])){
 
 
 ?>
-<!DOCTYPE HTML>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8">
-    <title>Formulário de cadastro</title>
-
-    <!-- bootstrap atual -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</head>
-<body>
-
-<!-- BARRA DE NAVEGACAO -->
-
-<!-- BARRA DE NAVEGACAO -->
-<?php
-require_once "../../../phpoopdo/admin/menu/nav.php";
-?>
-<!-- FIM BARRA DE NAVEGACAO -->
-<!-- FIM BARRA DE NAVEGACAO -->
 
 <!-- LISTAGEM DE USUARIOS QUE VEM DO BANCO DE DADOS -->
 <div class="container">

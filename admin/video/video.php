@@ -1,27 +1,12 @@
 <?php
 //BUSCANDO A CLASSE
-require_once "../../classes/Usuario.class.php";
-require_once "../../classes/Funcoes.class.php";
+require_once DIRCLASS. 'Video.class.php';
 
-//ESTANCIANDO A CLASSE
-$objUsuario = new Usuario();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARIO
-session_start();
-
-if($_SESSION["logado"] == "sim"){
-    $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
-}else{
-    header("location: ../../");
-}
-if(isset($_GET['sair']) == "sim"){
-    $objUsuario->usuarioLogado();
-}
+$objVideo = new Video();
 
 //CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){
-    if($objUsuario->insere($_POST) == 'ok'){
+    if($objVideo->insere($_POST) == 'ok'){
         header('location: ');
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -39,7 +24,7 @@ if(isset($_POST['btCadastrarProduto'])){
 
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
-    if($objUsuario->updade($_POST) == 'ok'){
+    if($objVideo->updade($_POST) == 'ok'){
         header('location: ?acao=edit&usuario='.$_GET['usuario']);
     }else{
         echo '<script type="text/javascript">alert("Erro em atualizar");</script>';
@@ -49,9 +34,9 @@ if(isset($_POST['btAlterar'])){
 //SELECIONADO O FUNCIONARIO
 if(isset($_GET['acaoU'])){
     switch($_GET['acaoU']){
-        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
+        case 'edit': $usuario = $objVideo->selecionaUm($_GET['usuario']); break;
         case 'delet':
-            if($objUsuario->delete($_GET['usuario']) == 1){
+            if($objVideo->delete($_GET['usuario']) == 1){
                 //echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
                 header('location: ');
             }else{
@@ -94,4 +79,3 @@ if(isset($_GET['acaoP'])){
 require_once "../menu/nav.php";
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
-
