@@ -13,8 +13,8 @@ class Conexao{
 	public function __construct(){
 		$this->servidor = "localhost";
 		$this->banco = "phpoo";
-		$this->usuario = "jimi";
-		$this->senha = "341322";
+		$this->usuario = "root";
+		$this->senha = "";
 	}
 
 	//METODO PARA CONECTAR
