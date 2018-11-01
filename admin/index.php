@@ -1,29 +1,3 @@
-<?php
-#arquivo de configurações
-require_once '../config/config.php';
-
-//BUSCANDO AS CLASSES
-require_once DIRCLASS. 'Usuario.class.php';
-require_once DIRCLASS. 'Funcoes.class.php';
-
-//Instanciando
-$objUsuario = new Usuario();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARI'
-session_start();
-
-if($_SESSION["logado"] == "sim"){
-	$objUsuario->usuarioLogado($_SESSION['pk']);
-}else{
-	header("location: ".DIRROOT);
-}
-
-if(isset($_GET['sair']) == "sim"){
-	$objUsuario->sairusuarios();
-}
-
-?>
 
 <!DOCTYPE HTML>
 <html lang="pt-br">
@@ -41,13 +15,16 @@ if(isset($_GET['sair']) == "sim"){
 <body>
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once DIRNAV . 'nav.php';
+#arquivo de configurações
+require_once '../config/config.php';
+require_once DIRNAV. 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 
 <!-- Conteúdo -->
 
 <?php
+/*
 
 if ($_GET['pg']=='usuario'){
 	require_once DIRADMIN . 'usuario/usuario.php';
@@ -69,8 +46,7 @@ elseif ($_GET['pg']=='cardapio'){
 }else{
 	echo '<p><h1 class="center form-signin-heading"> Área administrativa </h1></p>';
 }
-
-
+*/
 
 ?>
 

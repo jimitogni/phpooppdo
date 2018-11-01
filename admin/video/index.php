@@ -13,15 +13,6 @@ if(isset($_POST['btCadastrar'])){
     }
 }
 
-/*//CADASTRANDO O Produto
-if(isset($_POST['btCadastrarProduto'])){
-    if($objProduto->insereProduto($_POST) == 'ok'){
-        header('location: ');
-    }else{
-        echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
-    }
-}*/
-
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
     if($objVideo->updade($_POST) == 'ok'){
@@ -46,19 +37,6 @@ if(isset($_GET['acaoU'])){
     }
 }
 
-/*//SELECIONADO UM PRODUTO OU ANUNCI
-if(isset($_GET['acaoP'])){
-    switch($_GET['acaoP']){
-        case 'edit': $produto = $objProduto->selecionaUmProduto($_GET['produto']); break;
-        case 'delet':
-            if($objProduto->delete($_GET['produto']) == 1){
-                header('location: ');
-            }else{
-                echo '<script type="text/javascript">alert("Erro em deletar");</script>';
-            }
-                break;
-    }
-}*/
 
 ?>
 <!DOCTYPE HTML>

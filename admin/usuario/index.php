@@ -1,4 +1,15 @@
 <?php
+#arquivo de configurações
+include_once'../../config/config.php';
+include_once '../config/config.php';
+
+//BUSCANDO AS CLASSES
+require_once DIRCLASS. 'Usuario.class.php';
+
+//Instanciando
+$objUsuario = new Usuario();
+
+
 //CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){
     if($objUsuario->insere($_POST) == 'ok'){
@@ -39,6 +50,21 @@ if(isset($_GET['acaoU'])){
 require_once DIRNAV . 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
+
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+    <title>Home</title>
+
+    <!-- bootstrap atual -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
 
 <!-- espaço -->
 <br> <br>
