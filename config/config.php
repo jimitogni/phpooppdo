@@ -1,6 +1,6 @@
 <?php
 #diretórios raizes
-$PastaInterna="/phpoopdo";
+$PastaInterna="/php/phpoopdo";
 
 define ('DIRPAGE', "http://{$_SERVER['HTTP_HOST']}/{$PastaInterna}");
 
