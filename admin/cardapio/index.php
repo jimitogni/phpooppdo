@@ -1,8 +1,32 @@
 <?php
+#inicia a sessao do usuario
+session_start();
+
+#arquivo de configurações
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
+
 //BUSCANDO A CLASSE
 require_once DIRCLASS. 'Cardapio.class.php';
+require_once DIRCLASS. 'Funcoes.class.php';
 
 $objCardapio = new Cardapio();
+$objFc = new Funcoes();
 
 //CADASTRANDO
 if(isset($_POST['btCadastrar'])){
@@ -39,6 +63,27 @@ if(isset($_GET['acao'])){
 
 
 ?>
+
+<!-- BARRA DE NAVEGACAO -->
+<?php
+require_once DIRNAV . 'nav.php';
+?>
+<!-- FIM BARRA DE NAVEGACAO -->
+
+<!DOCTYPE HTML>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+    <title>Home</title>
+
+    <!-- bootstrap atual -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
 
 <!-- LISTAGEM DE USUARIOS QUE VEM DO BANCO DE DADOS -->
 <div class="container">

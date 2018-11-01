@@ -1,4 +1,27 @@
 <?php
+#inicia a sessao do usuario
+session_start();
+
+#arquivo de configurações
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
+
+
 //BUSCANDO A CLASSE
 require_once DIRCLASS. 'Video.class.php';
 
@@ -54,6 +77,6 @@ if(isset($_GET['acaoU'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../menu/nav.php";
+require_once DIRNAV . 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->

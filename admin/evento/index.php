@@ -1,27 +1,46 @@
 <?php
-//BUSCANDO A CLASSE
-require_once "../../classes/Usuario.class.php";
-require_once "../../classes/Funcoes.class.php";
-
-//ESTANCIANDO A CLASSE
-$objUsuario = new Usuario();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARIO
+#inicia a sessao do usuario
 session_start();
 
+#arquivo de configurações
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
+
+
+//BUSCANDO AS CLASSES
+require_once DIRCLASS. 'Evento.class.php';
+
+//Instanciando
+$objEvento = new Evento();
+
+
 if($_SESSION["logado"] == "sim"){
-    $objUsuario->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
+    $objEvento->usuarioLogado($_SESSION['pk']);//passa a chave para pegar os dados de quem esta logado
 }else{
     header("location: ../../");
 }
 if(isset($_GET['sair']) == "sim"){
-    $objUsuario->usuarioLogado();
+    $objEvento->usuarioLogado();
 }
 
 //CADASTRANDO O FUNCIONARIO
 if(isset($_POST['btCadastrar'])){
-    if($objUsuario->insere($_POST) == 'ok'){
+    if($objEvento->insere($_POST) == 'ok'){
         header('location: ');
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -39,7 +58,7 @@ if(isset($_POST['btCadastrarProduto'])){
 
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
-    if($objUsuario->updade($_POST) == 'ok'){
+    if($objEvento->updade($_POST) == 'ok'){
         header('location: ?acao=edit&usuario='.$_GET['usuario']);
     }else{
         echo '<script type="text/javascript">alert("Erro em atualizar");</script>';
@@ -49,9 +68,9 @@ if(isset($_POST['btAlterar'])){
 //SELECIONADO O FUNCIONARIO
 if(isset($_GET['acaoU'])){
     switch($_GET['acaoU']){
-        case 'edit': $usuario = $objUsuario->selecionaUm($_GET['usuario']); break;
+        case 'edit': $usuario = $objEvento->selecionaUm($_GET['usuario']); break;
         case 'delet':
-            if($objUsuario->delete($_GET['usuario']) == 1){
+            if($objEvento->delete($_GET['usuario']) == 1){
                 //echo '<script type="text/javascript">alert("Deletado com sucesso");</script>';
                 header('location: ');
             }else{
@@ -91,7 +110,7 @@ if(isset($_GET['acaoP'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../menu/nav.php";
+require_once DIRNAV . 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 

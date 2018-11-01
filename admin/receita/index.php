@@ -1,4 +1,26 @@
 <?php
+#inicia a sessao do usuario
+session_start();
+
+#arquivo de configurações
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
+
 //BUSCANDO A CLASSE
 require_once DIRCLASS. 'Receita.class.php';
 
@@ -13,14 +35,6 @@ if(isset($_POST['btCadastrar'])){
     }
 }
 
-/*//CADASTRANDO O Produto
-if(isset($_POST['btCadastrarProduto'])){
-    if($objProduto->insereProduto($_POST) == 'ok'){
-        header('location: ');
-    }else{
-        echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
-    }
-}*/
 
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
@@ -46,21 +60,8 @@ if(isset($_GET['acaoU'])){
     }
 }
 
-/*//SELECIONADO UM PRODUTO OU ANUNCI
-if(isset($_GET['acaoP'])){
-    switch($_GET['acaoP']){
-        case 'edit': $produto = $objProduto->selecionaUmProduto($_GET['produto']); break;
-        case 'delet':
-            if($objProduto->delete($_GET['produto']) == 1){
-                header('location: ');
-            }else{
-                echo '<script type="text/javascript">alert("Erro em deletar");</script>';
-            }
-                break;
-    }
-}*/
-
 ?>
+
 <!DOCTYPE HTML>
 <html lang="pt-br">
 <head>
@@ -77,6 +78,6 @@ if(isset($_GET['acaoP'])){
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once "../menu/nav.php";
+require_once DIRNAV . 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->

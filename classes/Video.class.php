@@ -4,7 +4,7 @@ include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
 
 //CRIANDO A CLASSE
-class Produto {
+class Video {
 
 	//ATRIBUTOS
 	private $con;
@@ -14,8 +14,8 @@ class Produto {
 	private $tituloVideo;
 	private $nivelVideo;
 	private $descricaoVideo;
-  private $urlVideo;
-  private $publicadoVideo;
+  	private $urlVideo;
+  	private $publicadoVideo;
 
 
 	//CONSTRUTOR
