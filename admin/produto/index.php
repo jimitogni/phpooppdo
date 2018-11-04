@@ -82,11 +82,14 @@ require_once DIRNAV . 'nav.php';
 <div class="row">
     <div class="col-6">
         <div class="border bg-light panel panel-primary list-group">
-        <h3>Lista Anuncios</h3>
+        <h3>Listagem de Produtos</h3>
             <?php foreach($objProduto->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
                 <div><?=$rst['nome_produto']?></div>
-                <div>valor: <?echo $rst['valor_produto']?></div>
+                <div>Fornecedor: <?echo $rst['fornecedor']?></div>
+                <div>Valor: <?echo $rst['valor_produto']?></div>
+                <div>Data de Cadastro: <?print date("d/m/Y");?></div>
+                <div>Publicado: <?echo $rst['publicado']?></div>
                 <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
                 <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
@@ -105,19 +108,22 @@ require_once DIRNAV . 'nav.php';
 
                 <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
 
+                <input class="form-control" name="fornecedor" type="text" placeholder="Nome do fornecedor:" value="<?=$objFc->tratarCaracter((isset($produto['fornecedor']))?($produto['descricao_produto']):(''), 2)?>"><br>
+
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
 
-                <input type="file" name="foto111" ><br><br>
+                <input type="file" name="foto" ><br><br>
 
 
 
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="1">
+                  <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox1" value="1">
                   <label class="form-check-label" for="inlineCheckbox1">Sim</label>
                 </div>
+
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="2">
+                  <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox2" value="2">
                   <label class="form-check-label" for="inlineCheckbox2">Não</label>
                 </div>
 

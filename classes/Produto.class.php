@@ -14,6 +14,7 @@ class Produto {
 	private $nomeProduto;
 	private $descricaoProduto;
 	private $preco;
+	private $publicado;
 	private $dataCadastro;
 	private $vencimento;
 	private $fornecedor;
@@ -51,7 +52,7 @@ class Produto {
 
 	public function selecionaTudo(){
 		try{
-			$cst = $this->con->conectar()->prepare("SELECT `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos`");
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `produtos`");
 			$cst->execute();
 			return $cst->fetchAll();
 		}catch(PDOException $e){
@@ -65,20 +66,20 @@ class Produto {
 			$this->nomeProduto = $this->objfc->tratarCaracter($dados['nomeProduto'], 1);
 			$this->descricaoProduto = $this->objfc->tratarCaracter($dados['descricaoProduto'], 1);
 			$this->preco = $dados['preco'];
-			//$this->foto = $dados['foto111'];
+			$this->publicado = $dados['publicado'];
+			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
+			$this->dataCadastro = date("d/m/Y");
+			$this->foto = $dados['foto'];
 			//$this->dataCadastro = $this->objfc->dataAtual(2);
 			//$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			//$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
-
-			
-			//$cst->bindParam(":dataCadastro", $this->dataCadastro, PDO::PARAM_STR);
 			//$cst->bindParam(":vencimento", $this->vencimento, PDO::PARAM_STR);
 			//$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
 
 			// Recupera os dados dos campos
 	
-	// Se a foto estiver sido selecionada
-			if (!empty($foto111["name"])) {
+			// Se a foto estiver sido selecionada
+			if (!empty($foto["name"])) {
 				
 				// Largura máxima em pixels
 				$largura = 2000;
@@ -90,12 +91,12 @@ class Produto {
 				$error = array();
 
 				// Verifica se o arquivo é uma imagem
-				if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto111["type"])){
+				if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto["type"])){
 			 	   $error[1] = "Isso não é uma imagem.";
 				 	} 
 
 				// Pega as dimensões da imagem
-				$dimensoes = getimagesize($foto111["tmp_name"]);
+				$dimensoes = getimagesize($foto["tmp_name"]);
 
 				// Verifica se a largura da imagem é maior que a largura permitida
 				if($dimensoes[0] > $largura) {
@@ -108,7 +109,7 @@ class Produto {
 				}
 				
 				// Verifica se o tamanho da imagem é maior que o tamanho permitido
-				if($foto111["size"] > $tamanho) {
+				if($foto["size"] > $tamanho) {
 					 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
 				}
 
@@ -116,7 +117,7 @@ class Produto {
 				if (count($error) == 0) {
 				
 					// Pega extensão da imagem
-					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto111["name"], $ext);
+					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto["name"], $ext);
 
 			    	// Gera um nome único para a imagem
 			    	$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
@@ -125,40 +126,47 @@ class Produto {
 			    	$caminho_imagem = "img/" . $nome_imagem;
 
 					// Faz o upload da imagem para seu respectivo caminho
-					move_uploaded_file($foto111["tmp_name"], $caminho_imagem);
+					move_uploaded_file($foto["tmp_name"], $caminho_imagem);
 				
-					$this->foto111 = $nome_imagem;
+					$this->foto = $nome_imagem;
 					// Insere os dados no banco
-					$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `urlimagem`) VALUES (:nomeProduto, :descricaoProduto, :preco, :imagem);");
+					/*$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`) VALUES (:nomeProduto, :descricaoProduto, :preco);");
 
 					$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
 					$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
 					$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
-					$cst->bindParam(":imagem", $this->foto, PDO::PARAM_STR);
+					//$cst->bindParam(":imagem", $this->foto, PDO::PARAM_STR);
+
+					// Se houver mensagens de erro, exibe-as
+					if (count($error) != 0) {
+						foreach ($error as $erro) {
+							echo $erro . "<br />";
+						}
+					}*/
+				}
+			}
 					
-				}
+			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor);");
 
-				// Se houver mensagens de erro, exibe-as
-				if (count($error) != 0) {
-					foreach ($error as $erro) {
-						echo $erro . "<br />";
-					}
-				}
-			
+				
+			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
+			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
+			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
+			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);	
+			$cst->bindParam(":datacadastro", $this->dataCadastro, PDO::PARAM_STR);
+			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);				
 
-
-					if($cst->execute()){
-						return 'ok';
-					}else{
-						return 'Error ao cadastrar';
-					}
-				}
-
-			}catch(PDOException $e){
-			return 'Error: '.$e->getMessage();
+			if($cst->execute()){
+				return 'ok';
+			}else{
+				return 'Error ao cadastrar';
 			}
 
+		}catch(PDOException $e){
+		return 'Error: '.$e->getMessage();
+		}
 	}
+
 
 
 	public function updade($dados){
