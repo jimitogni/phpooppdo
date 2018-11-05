@@ -1,3 +1,31 @@
+<?php
+#arquivo de configurações
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
+
+//BUSCANDO A CLASSE
+require_once DIRCLASS. 'Funcoes.class.php';
+require_once DIRCLASS. 'Produto.class.php';
+
+$objProduto = new Produto();
+$objFc = new Funcoes();
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -90,36 +118,27 @@
 <section>
 <article>
 
-<div class="row">
-<div class="col s12 m6">
-  <div class="card">
-    <div class="card-image">
-      <img src="imagens/logo_cps.png">
-      <span class="card-title black-text">EPA</span>
-    </div>
-    <div class="card-content">
-      <p>EPA - Etec de Portas Abertas.</p>
-    </div>
-    <div class="card-action">
-      <a href="#">Saiba mais</a>
-    </div>
-  </div>
-</div>
+<h1>Listagem de produtos </h1>
 
+<div class="row">
+
+<?php foreach($objProduto->selecionaTudo() as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="imagens/etec-itu.jpg">
-      <span class="card-title">Competição de robótica</span>
+      <img src="/php/phpoopdo/img/<?echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
-      <p>Venham participar e prestigiar a competição de carrinhos seguidores de linha.</p>
+        <div>Fornecedor: <?echo $rst['fornecedor']?></div>
+        <div>Data de Cadastro: <?echo $rst['datacadastro']?></div>
     </div>
     <div class="card-action">
-      <a href="#">Saiba mais</a>
+      <a href="#">Valor: <?echo $rst['valor_produto']?></a>
     </div>
   </div>
 </div>
+<?php } ?>
 
 </div>
 
