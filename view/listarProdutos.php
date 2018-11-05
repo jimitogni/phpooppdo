@@ -126,15 +126,15 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/php/phpoopdo/img/<?echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/php/phpoopdo/img/<?php $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
-        <div>Fornecedor: <?echo $rst['fornecedor']?></div>
-        <div>Data de Cadastro: <?echo $rst['datacadastro']?></div>
+        <div>Fornecedor: <?php echo $rst['fornecedor']?></div>
+        <div>Data de Cadastro: <?php echo $rst['datacadastro']?></div>
     </div>
     <div class="card-action">
-      <a href="#">Valor: <?echo $rst['valor_produto']?></a>
+      <a href="#">Valor: <?php echo $rst['valor_produto']?></a>
     </div>
   </div>
 </div>
