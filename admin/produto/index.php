@@ -90,6 +90,8 @@ require_once DIRNAV . 'nav.php';
                 <div>Valor: <?echo $rst['valor_produto']?></div>
                 <div>Data de Cadastro: <?print date("d/m/Y");?></div>
                 <div>Publicado: <?echo $rst['publicado']?></div>
+                <div>Imagem: <img src="/php/phpoopdo/img/<?echo $rst['urlimagem']?>" width="100" height="100" alt="Imagem do produto"></div>
+
                 <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
                 <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
@@ -112,7 +114,7 @@ require_once DIRNAV . 'nav.php';
 
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
 
-                <input type="file" name="foto"><br><br>
+                <input type="file" name="userfile"><br><br>
 
 
 

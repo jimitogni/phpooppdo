@@ -69,7 +69,7 @@ class Produto {
 			$this->publicado = $dados['publicado'];
 			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 			$this->dataCadastro = date("d/m/Y");
-			$fotoup = $dados['foto'];
+			//$fotoup = $_FILES['userfile']['name'];
 			//$this->dataCadastro = $this->objfc->dataAtual(2);
 			//$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			//$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
@@ -79,60 +79,66 @@ class Produto {
 			// Recupera os dados dos campos
 	
 			// Se a foto estiver sido selecionada
-			//if (!empty($fotoup["name"])) {
+			//if (!empty($_FILES['userfile'])) {
 				
 				// Largura máxima em pixels
-				$largura = 2000;
+				//$largura = 2000;
 				// Altura máxima em pixels
-				$altura = 3000;
+				//$altura = 3000;
 				// Tamanho máximo do arquivo em bytes
-				$tamanho = 5000;
+				//$tamanho = 5000;
 
-				$error = array();
+				//$error = array();
 
 				// Verifica se o arquivo é uma imagem
-				/*if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $fotoup["type"])){
-			 	   $error[1] = "Isso não é uma imagem.";
-				 	}
+				//if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $_FILES['userfile']['name'])){
+			 	  // $error[1] = "Isso não é uma imagem.";
+				//}
 
 				// Pega as dimensões da imagem
-				$dimensoes = getimagesize($fotoup["tmp_name"]);
+				//$dimensoes = getimagesize($_FILES['userfile']['name']);
 
 				// Verifica se a largura da imagem é maior que a largura permitida
-				if($dimensoes[0] > $largura) {
-					$error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
-				}
+				//if($dimensoes[0] > $largura) {
+				//	$error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
+				//}
 
 				// Verifica se a altura da imagem é maior que a altura permitida
-				if($dimensoes[1] > $altura) {
-					$error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
-				}
+				//if($dimensoes[1] > $altura) {
+				//	$error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
+				//}
 				
 				// Verifica se o tamanho da imagem é maior que o tamanho permitido
-				if($fotoup["size"] > $tamanho) {
-					 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
-				}*/
+				//if($fotoup["size"] > $tamanho) {
+				//	 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
+				//}
 
 				// Se não houver nenhum erro
 				//if (count($error) == 0) {
 				
 					// Pega extensão da imagem
-					//preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $fotoup["name"], $ext);
+					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $_FILES['userfile']['name'], $ext);
+
+					//$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
 
 					$uploaddir = '/var/www/html/php/phpoopdo/img/';
-					$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+					
+					$nomedafoto = md5(uniqid(time())) . "." . $ext[1];
 
-					echo "<br> arquivo: ".basename($_FILES['userfile']['name']);
+					$uploadfile = '/var/www/html/php/phpoopdo/img/'.$nomedafoto;
 
-					if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+					echo "<br> nomedafoto: ".$nomedafoto;
+					echo "<br> <br> uploadfile: ".$uploadfile;
+					echo "<br> <br>";
+
+					if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)){
 					echo "Arquivo válido e enviado com sucesso.\n";
 					} else {
 					echo "Possível ataque de upload de arquivo!\n";
 					}
 
-
 			    	// Gera um nome único para a imagem
-			    	$nome_imagem = basename($_FILES['userfile']['name']);
+			    	//$nome_imagem = basename($_FILES['userfile']['name']);
 
 			    	// Caminho de onde ficará a imagem
 			    	//$caminho_imagem = "/var/www/html/php/phpoopdo/img/" . $nome_imagem;
@@ -153,8 +159,8 @@ class Produto {
 					if (count($error) != 0) {
 						foreach ($error as $erro) {
 							echo $erro . "<br />";
-						}
-					}*/
+						}*/
+					//}
 				//}
 			//}
 			print_r($_FILES);
@@ -168,7 +174,7 @@ class Produto {
 			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);	
 			$cst->bindParam(":datacadastro", $this->dataCadastro, PDO::PARAM_STR);
 			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
-			$cst->bindParam(":urlimagem", $nome_imagem, PDO::PARAM_STR);
+			$cst->bindParam(":urlimagem", $nomedafoto, PDO::PARAM_STR);
 
 
 			if($cst->execute()){
