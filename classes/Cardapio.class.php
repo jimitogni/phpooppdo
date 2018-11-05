@@ -61,21 +61,16 @@ class Cardapio {
 	public function insere($dados){
 		try{
 			$this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);
-			$this->itensCard = $dados['itensCard'];
 			$this->descricaoCard = $this->objfc->tratarCaracter($dados['descricaoCard'], 1);
-      $this->dataCard = $dados['dataCard'];
-			$this->diaDaSemana = $dados['diadasemana'];
+			$this->diaDaSemana = $dados['diaDaSemana'];
 			$this->publicadoCard = $dados['publicadoCard'];
-      		//$this->publicadoCard = $dados['publicadoCard'];
-
-			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `diadasemana`, `publicadoCard`) VALUES (:tituloCard, :itensCard, :descricaoCard, :dataCard, :diaDaSemana, :publicadoCard);");
+      		
+			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `descricaoCard`, `diaDaSemana`, `publicadoCard`) VALUES (:tituloCard, :descricaoCard, :diaDaSemana, :publicadoCard);");
 
 			$cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
-			$cst->bindParam(":itensCard", $this->itensCard, PDO::PARAM_STR);
 			$cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
 			$cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
-			$cst->bindParam(":dataCard", $this->dataCard, PDO::PARAM_STR);
-			$cst->bindParam(":diadasemana", $this->diaDaSemana, PDO::PARAM_STR);
+			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_STR);
 
 			if($cst->execute()){
 				return 1;
@@ -91,19 +86,15 @@ class Cardapio {
 	public function updade($dados){
 		try{
       $this->idCard = $this->objfc->tratarCaracter($dados['idCard'], 1);
-      $this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);
-	  $this->itensCard = $this->objfc->tratarCaracter($dados['preparoReceita'], 1);
+      $this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);	  
 	  $this->descricaoCard = $this->objfc->tratarCaracter($dados['descricaoCard'], 1);
-      $this->dataCard = $dados['dataCard'];
       $this->publicadoCard = $dados['publicadoCard'];
 
       $cst = $this->con->conectar()->prepare("UPDATE `cardapio` SET `tituloCard`=:tituloCard, `itensCard`=:itensCard, `descricaoCard`=:descricaoCard, `dataCard`=:dataCard, `publicadoCard`=:publicadoCard WHERE `idCard`=:idCard;");
 
       $cst->bindParam(":idCard", $this->idCard, PDO::PARAM_STR);
 	  $cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
-	  $cst->bindParam(":itensCard", $this->itensCard, PDO::PARAM_STR);
 	  $cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
-	  $cst->bindParam(":dataCard", $this->dataCard, PDO::PARAM_STR);
       $cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
 			if($cst->execute()){
 				return '1';

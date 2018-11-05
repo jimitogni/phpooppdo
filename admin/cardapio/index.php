@@ -100,9 +100,9 @@ require_once DIRNAV . 'nav.php';
             <div class="list-group-item">
                 <div><?=$rst['tituloCard']?></div>
                 <div>valor: <?echo $rst['descricaoCard']?></div>
-                <div><a href="?acaoP=edit&cardapio=<?=$rst['pk_cardapio']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div><a href="?acaoP=edit&cardapio=<?php echo $rst['idCard']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
-                <div><a href="?acaoP=delet&cardapio=<?=$rst['pk_cardapio']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acaoP=delet&cardapio=<?php echo $rst['idCard']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
