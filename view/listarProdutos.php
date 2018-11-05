@@ -126,7 +126,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/php/phpoopdo/img/<?php $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
