@@ -130,6 +130,7 @@ $objFc = new Funcoes();
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
+        <div>Chave: <?php echo $rst['pk_produto']?></div>
         <div>Fornecedor: <?php echo $rst['fornecedor']?></div>
         <div>Data de Cadastro: <?php echo $rst['datacadastro']?></div>
     </div>

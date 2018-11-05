@@ -85,12 +85,12 @@ require_once DIRNAV . 'nav.php';
         <h3>Listagem de Produtos</h3>
             <?php foreach($objProduto->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
-                <div><?=$rst['nome_produto']?></div>
-                <div>Fornecedor: <?php echo $rst['fornecedor']?></div>
-                <div>Valor: <?php echo $rst['valor_produto']?></div>
-                <div>Data de Cadastro: <?print date("d/m/Y");?></div>
-                <div>Publicado: <?php echo $rst['publicado']?></div>
-                <div>Dia da semana: <?php echo $rst['diadasemana']?></div>
+                <div><b>Nome:</b> <?php echo $rst['nome_produto']?></div>
+                <div><b>Fornecedor:</b> <?php echo $rst['fornecedor']?></div>
+                <div><b>Valor:</b> <?php echo $rst['valor_produto']?></div>
+                <div><b>Data de Cadastro:</b> <?print date("d/m/Y");?></div>
+                <div><b>Publicado:</b> <?php echo $rst['publicado']?></div>
+                <div><b>Dia da semana:</b> <?php echo $rst['diadasemana']?></div>
                 <div>Imagem: <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="100" alt="Imagem do produto"></div>
 
                 <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
