@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Nov-2018 às 18:09
+-- Generation Time: 05-Nov-2018 às 19:15
 -- Versão do servidor: 10.1.13-MariaDB
 -- PHP Version: 7.0.8
 
@@ -29,12 +29,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `cardapio` (
   `idCard` int(2) NOT NULL,
   `tituloCard` varchar(20) NOT NULL,
-  `itensCard` int(2) NOT NULL,
+  `itensCard` int(2) DEFAULT NULL,
   `descricaoCard` varchar(50) DEFAULT NULL,
   `dataCard` date DEFAULT NULL,
   `publicadoCard` int(2) NOT NULL,
   `diadasemana` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `cardapio`
+--
+
+INSERT INTO `cardapio` (`idCard`, `tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `publicadoCard`, `diadasemana`) VALUES
+(3, 'teste', NULL, 'Cardápio da segunda feira', NULL, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -62,7 +69,11 @@ INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `d
 ('hquefhauefh', 'ehfuahfuah', 32323232, '05/11/2018', 'produto 1', 59, 1, 'c0ca0ce5a1829d7e7a6601378e5b3f78.png', NULL),
 ('garga ergre ar erg a', 'ergqergq erg qreg qe', 4.545324422386921e20, '05/11/2018', 'produto 7', 61, 1, 'b84b3044913a28055d689c8ba855412c.jpg', NULL),
 ('gsdfgsdfgsdf sgdf gd', 'ehfuahfuah', 455345340416, '05/11/2018', 'fornecedor 10', 62, 1, 'f99b61d86dfa634630d9ee25dd35a6ab.jpg', NULL),
-('dgfsdfg sdfg sdfg sd', 'produto 1', 444, '05/11/2018', 'fornecedor 10', 63, 1, '798049555a0f7d6fc43afdf6f92ed91e.jpg', NULL);
+('dgfsdfg sdfg sdfg sd', 'produto 1', 444, '05/11/2018', 'fornecedor 10', 63, 1, '798049555a0f7d6fc43afdf6f92ed91e.jpg', NULL),
+('windows 2', 'windows 2', 3, '05/11/2018', 'windows 2', 65, 1, '36652a660931b00a4b9d77d945b2af27.jpg', 3),
+('windows 2', 'windows 2', 2, '05/11/2018', 'windows', 66, 1, 'ff1106aef0d8ad0a4ab5348c24d41ed0.jpg', 2),
+('windows 2', 'windows 2', 2, '05/11/2018', 'windows 2', 67, 1, 'f2efe4ebc7b59cb4b2879f6ff0d7227f.jpg', 1),
+('windows 5', 'windows 5', 3, '05/11/2018', 'windows 5', 68, 1, '3c31cc21e51a82ffbe0c7da5362b8199.jpg', 5);
 
 -- --------------------------------------------------------
 
@@ -155,12 +166,12 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `cardapio`
 --
 ALTER TABLE `cardapio`
-  MODIFY `idCard` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCard` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
 -- AUTO_INCREMENT for table `receita`
 --
