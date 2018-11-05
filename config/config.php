@@ -1,6 +1,13 @@
 <?php
 #diretórios raizes
-$PastaInterna="/php/phpoopdo";
+
+#arquivo de configurações
+if(is_dir('/var/www/html/php/phpoopdo/')){
+  $PastaInterna="/php/phpoopdo";
+}else {
+  $PastaInterna="/phpoopdo";
+}
+
 
 define ('DIRPAGE', "http://{$_SERVER['HTTP_HOST']}/{$PastaInterna}");
 
