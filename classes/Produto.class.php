@@ -120,11 +120,11 @@ class Produto {
 
 					//$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
 
-					$uploaddir = '/var/www/html/php/phpoopdo/img/';
+					$uploaddir = '/phpoopdo/img/';
 
 					$nomedafoto = md5(uniqid(time())) . "." . $ext[1];
 
-					$uploadfile = '/var/www/html/php/phpoopdo/img/'.$nomedafoto;
+					$uploadfile = DIRROOT.'/img/'.$nomedafoto;
 
 					echo "<br> nomedafoto: ".$nomedafoto;
 					echo "<br> <br> uploadfile: ".$uploadfile;
