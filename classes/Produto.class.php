@@ -68,7 +68,10 @@ class Produto {
 			$this->descricaoProduto = $this->objfc->tratarCaracter($dados['descricaoProduto'], 1);
 			$this->preco = $dados['preco'];
 			$this->publicado = $dados['publicado'];
+<<<<<<< HEAD
 			$this->diaDaSemana = $dados['diaDaSemana'];
+=======
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 			$this->dataCadastro = date("d/m/Y");
 			//$fotoup = $_FILES['userfile']['name'];
@@ -79,10 +82,17 @@ class Produto {
 			//$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
 
 			// Recupera os dados dos campos
+<<<<<<< HEAD
 
 			// Se a foto estiver sido selecionada
 			//if (!empty($_FILES['userfile'])) {
 
+=======
+	
+			// Se a foto estiver sido selecionada
+			//if (!empty($_FILES['userfile'])) {
+				
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 				// Largura máxima em pixels
 				//$largura = 2000;
 				// Altura máxima em pixels
@@ -109,7 +119,11 @@ class Produto {
 				//if($dimensoes[1] > $altura) {
 				//	$error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
 				//}
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 				// Verifica se o tamanho da imagem é maior que o tamanho permitido
 				//if($fotoup["size"] > $tamanho) {
 				//	 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
@@ -117,14 +131,22 @@ class Produto {
 
 				// Se não houver nenhum erro
 				//if (count($error) == 0) {
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 					// Pega extensão da imagem
 					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $_FILES['userfile']['name'], $ext);
 
 					//$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
 
 					$uploaddir = '/var/www/html/php/phpoopdo/img/';
+<<<<<<< HEAD
 
+=======
+					
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 					$nomedafoto = md5(uniqid(time())) . "." . $ext[1];
 
 					$uploadfile = '/var/www/html/php/phpoopdo/img/'.$nomedafoto;
@@ -147,7 +169,11 @@ class Produto {
 
 					// Faz o upload da imagem para seu respectivo caminho
 					//move_uploaded_file($fotoup["tmp_name"], $caminho_imagem);
+<<<<<<< HEAD
 
+=======
+				
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 					//$fotoup = $nome_imagem;
 					// Insere os dados no banco
 					/*$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`) VALUES (:nomeProduto, :descricaoProduto, :preco);");
@@ -156,6 +182,7 @@ class Produto {
 					$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
 					$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
 					//$cst->bindParam(":imagem", $this->foto, PDO::PARAM_STR);
+<<<<<<< HEAD
 
 					// Se houver mensagens de erro, exibe-as
 					if (count($error) != 0) {
@@ -180,6 +207,31 @@ class Produto {
 			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_STR);
 
 
+=======
+
+					// Se houver mensagens de erro, exibe-as
+					if (count($error) != 0) {
+						foreach ($error as $erro) {
+							echo $erro . "<br />";
+						}*/
+					//}
+				//}
+			//}
+			print_r($_FILES);
+					
+			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`, `urlimagem`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor, :urlimagem);");
+
+				
+			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
+			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
+			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
+			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);	
+			$cst->bindParam(":datacadastro", $this->dataCadastro, PDO::PARAM_STR);
+			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
+			$cst->bindParam(":urlimagem", $nomedafoto, PDO::PARAM_STR);
+
+
+>>>>>>> 4e77a00ecea57ef31e711646b857b8693cd2db81
 			if($cst->execute()){
 				return 'ok';
 			}else{

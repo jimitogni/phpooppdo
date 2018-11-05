@@ -90,7 +90,6 @@ require_once DIRNAV . 'nav.php';
                 <div>Valor: <?echo $rst['valor_produto']?></div>
                 <div>Data de Cadastro: <?print date("d/m/Y");?></div>
                 <div>Publicado: <?echo $rst['publicado']?></div>
-                <div>Dia da semana: <?echo $rst['diadasemana']?></div>
                 <div>Imagem: <img src="/php/phpoopdo/img/<?echo $rst['urlimagem']?>" width="100" height="100" alt="Imagem do produto"></div>
 
                 <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
@@ -129,43 +128,7 @@ require_once DIRNAV . 'nav.php';
                   <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox2" value="2">
                   <label class="form-check-label" for="inlineCheckbox2">Não</label>
                 </div>
-                <br><br>
 
-                <h5>Dias da Semana:</h5>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="1">
-                  <label class="form-check-label" for="diaDaSemana">Segunda</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="2">
-                  <label class="form-check-label" for="diaDaSemana">Terça</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="3">
-                  <label class="form-check-label" for="diaDaSemana">Quarta</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="4">
-                  <label class="form-check-label" for="diaDaSemana">Quinta</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="5">
-                  <label class="form-check-label" for="diaDaSemana">Sexta</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="6">
-                  <label class="form-check-label" for="diaDaSemana">Sabado</label>
-                </div>
-
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="7">
-                  <label class="form-check-label" for="diaDaSemana">Domingo</label>
-                </div>
 
                 <button type="submit" name="<?=(isset($_GET['acaoP']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acaoP']) == 'edit')?('Alterar'):('Cadastrar')?></button>
 
