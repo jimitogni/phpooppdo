@@ -79,7 +79,7 @@ class Produto {
 			// Recupera os dados dos campos
 	
 			// Se a foto estiver sido selecionada
-			if (!empty($foto["name"])) {
+			if (!empty($this->foto["name"])) {
 				
 				// Largura máxima em pixels
 				$largura = 2000;
@@ -91,12 +91,12 @@ class Produto {
 				$error = array();
 
 				// Verifica se o arquivo é uma imagem
-				if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto["type"])){
+				if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $this->foto["type"])){
 			 	   $error[1] = "Isso não é uma imagem.";
-				 	} 
+				 	}
 
 				// Pega as dimensões da imagem
-				$dimensoes = getimagesize($foto["tmp_name"]);
+				$dimensoes = getimagesize($this->foto["tmp_name"]);
 
 				// Verifica se a largura da imagem é maior que a largura permitida
 				if($dimensoes[0] > $largura) {
@@ -117,7 +117,7 @@ class Produto {
 				if (count($error) == 0) {
 				
 					// Pega extensão da imagem
-					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto["name"], $ext);
+					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $this->foto["name"], $ext);
 
 			    	// Gera um nome único para a imagem
 			    	$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
@@ -126,7 +126,7 @@ class Produto {
 			    	$caminho_imagem = "img/" . $nome_imagem;
 
 					// Faz o upload da imagem para seu respectivo caminho
-					move_uploaded_file($foto["tmp_name"], $caminho_imagem);
+					move_uploaded_file($this->foto["tmp_name"], $caminho_imagem);
 				
 					$this->foto = $nome_imagem;
 					// Insere os dados no banco
@@ -146,7 +146,7 @@ class Produto {
 				}
 			}
 					
-			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`, `urlimagem`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor, :urlimagem);");
 
 				
 			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
@@ -154,7 +154,9 @@ class Produto {
 			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
 			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);	
 			$cst->bindParam(":datacadastro", $this->dataCadastro, PDO::PARAM_STR);
-			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);				
+			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
+			$cst->bindParam(":urlimagem", $this->foto, PDO::PARAM_STR);
+
 
 			if($cst->execute()){
 				return 'ok';

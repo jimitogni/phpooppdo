@@ -112,7 +112,7 @@ require_once DIRNAV . 'nav.php';
 
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
 
-                <input type="file" name="foto" ><br><br>
+                <input type="file" name="foto"><br><br>
 
 
 
