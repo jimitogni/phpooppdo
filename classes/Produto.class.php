@@ -69,7 +69,7 @@ class Produto {
 			$this->publicado = $dados['publicado'];
 			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 			$this->dataCadastro = date("d/m/Y");
-			$this->foto = $dados['foto'];
+			$fotoup = $dados['foto'];
 			//$this->dataCadastro = $this->objfc->dataAtual(2);
 			//$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			//$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
@@ -79,7 +79,7 @@ class Produto {
 			// Recupera os dados dos campos
 	
 			// Se a foto estiver sido selecionada
-			if (!empty($this->foto["name"])) {
+			//if (!empty($fotoup["name"])) {
 				
 				// Largura máxima em pixels
 				$largura = 2000;
@@ -91,12 +91,12 @@ class Produto {
 				$error = array();
 
 				// Verifica se o arquivo é uma imagem
-				if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $this->foto["type"])){
+				/*if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $fotoup["type"])){
 			 	   $error[1] = "Isso não é uma imagem.";
 				 	}
 
 				// Pega as dimensões da imagem
-				$dimensoes = getimagesize($this->foto["tmp_name"]);
+				$dimensoes = getimagesize($fotoup["tmp_name"]);
 
 				// Verifica se a largura da imagem é maior que a largura permitida
 				if($dimensoes[0] > $largura) {
@@ -109,26 +109,38 @@ class Produto {
 				}
 				
 				// Verifica se o tamanho da imagem é maior que o tamanho permitido
-				if($foto["size"] > $tamanho) {
+				if($fotoup["size"] > $tamanho) {
 					 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
-				}
+				}*/
 
 				// Se não houver nenhum erro
-				if (count($error) == 0) {
+				//if (count($error) == 0) {
 				
 					// Pega extensão da imagem
-					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $this->foto["name"], $ext);
+					//preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $fotoup["name"], $ext);
+
+					$uploaddir = '/var/www/html/php/phpoopdo/img/';
+					$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+
+					echo "<br> arquivo: ".basename($_FILES['userfile']['name']);
+
+					if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) {
+					echo "Arquivo válido e enviado com sucesso.\n";
+					} else {
+					echo "Possível ataque de upload de arquivo!\n";
+					}
+
 
 			    	// Gera um nome único para a imagem
-			    	$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+			    	$nome_imagem = basename($_FILES['userfile']['name']);
 
 			    	// Caminho de onde ficará a imagem
-			    	$caminho_imagem = "img/" . $nome_imagem;
+			    	//$caminho_imagem = "/var/www/html/php/phpoopdo/img/" . $nome_imagem;
 
 					// Faz o upload da imagem para seu respectivo caminho
-					move_uploaded_file($this->foto["tmp_name"], $caminho_imagem);
+					//move_uploaded_file($fotoup["tmp_name"], $caminho_imagem);
 				
-					$this->foto = $nome_imagem;
+					//$fotoup = $nome_imagem;
 					// Insere os dados no banco
 					/*$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`) VALUES (:nomeProduto, :descricaoProduto, :preco);");
 
@@ -143,8 +155,9 @@ class Produto {
 							echo $erro . "<br />";
 						}
 					}*/
-				}
-			}
+				//}
+			//}
+			print_r($_FILES);
 					
 			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`, `urlimagem`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor, :urlimagem);");
 
@@ -155,7 +168,7 @@ class Produto {
 			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);	
 			$cst->bindParam(":datacadastro", $this->dataCadastro, PDO::PARAM_STR);
 			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
-			$cst->bindParam(":urlimagem", $this->foto, PDO::PARAM_STR);
+			$cst->bindParam(":urlimagem", $nome_imagem, PDO::PARAM_STR);
 
 
 			if($cst->execute()){
