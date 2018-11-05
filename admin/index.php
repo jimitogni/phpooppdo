@@ -1,28 +1,6 @@
 <?php
-#arquivo de configurações
-require_once '../config/config.php';
-
-//BUSCANDO AS CLASSES
-require_once DIRCLASS. 'Usuario.class.php';
-require_once DIRCLASS. 'Funcoes.class.php';
-
-//Instanciando
-$objUsuario = new Usuario();
-$objFc = new Funcoes();
-
-//VALIDANDO USUARI'
+#inicia a sessao do usuario
 session_start();
-
-if($_SESSION["logado"] == "sim"){
-	$objUsuario->usuarioLogado($_SESSION['pk']);
-}else{
-	header("location: ".DIRROOT);
-}
-
-if(isset($_GET['sair']) == "sim"){
-	$objUsuario->sairusuarios();
-}
-
 ?>
 
 <!DOCTYPE HTML>
@@ -39,15 +17,41 @@ if(isset($_GET['sair']) == "sim"){
 </head>
 
 <body>
-<!-- BARRA DE NAVEGACAO -->
+
+<!-- BARRA DE NAVEGACAO Menus -->
 <?php
-require_once DIRNAV . 'nav.php';
+#inicia a sessao do usuario
+
+#arquivo de configurações
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
+
+//inclue o menu
+require_once DIRNAV. 'nav.php';
 ?>
+
+
 <!-- FIM BARRA DE NAVEGACAO -->
 
 <!-- Conteúdo -->
 
 <?php
+/*
 
 if ($_GET['pg']=='usuario'){
 	require_once DIRADMIN . 'usuario/usuario.php';
@@ -69,9 +73,8 @@ elseif ($_GET['pg']=='cardapio'){
 }else{
 	echo '<p><h1 class="center form-signin-heading"> Área administrativa </h1></p>';
 }
-
-
-
+*/
+echo "<p class='text-center text-primary '><h1>Area administrativa </h1></p>";
 ?>
 
 <!-- Conteúdo -->

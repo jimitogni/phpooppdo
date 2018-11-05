@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 28/10/2018 às 23:27
+-- Tempo de geração: 05/11/2018 às 08:29
 -- Versão do servidor: 10.1.26-MariaDB-0+deb9u1
 -- Versão do PHP: 7.0.30-0+deb9u1
 
@@ -44,19 +44,25 @@ CREATE TABLE `cardapio` (
 CREATE TABLE `produtos` (
   `nome_produto` varchar(20) NOT NULL,
   `descricao_produto` varchar(20) NOT NULL,
-  `valor_produto` float NOT NULL,
+  `valor_produto` double NOT NULL,
+  `datacadastro` varchar(10) NOT NULL,
+  `fornecedor` varchar(50) DEFAULT NULL,
   `pk_produto` int(11) NOT NULL,
-  `publicado` int(2) NOT NULL,
-  `urlimagem` varchar(20) NOT NULL
+  `publicado` int(2) DEFAULT NULL,
+  `urlimagem` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Fazendo dump de dados para tabela `produtos`
 --
 
-INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `pk_produto`, `publicado`, `urlimagem`) VALUES
-('hquefhauefh', 'ehfuahfuah', 333, 8, 0, ''),
-('produto 1', 'produto 1', 9999, 10, 0, '');
+INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `datacadastro`, `fornecedor`, `pk_produto`, `publicado`, `urlimagem`) VALUES
+('produto 1', 'produto 1', 9999, '05/11/2018', 'produto 1', 57, 1, 'c506bfcaa93e1451a8a969cb187bf285.jpeg'),
+('produto 5', 'produto 1', 9999, '05/11/2018', 'produto 1', 58, 1, '3df3f3a6732f00a27cdbb20f90612f8a.jpg'),
+('hquefhauefh', 'ehfuahfuah', 32323232, '05/11/2018', 'produto 1', 59, 1, 'c0ca0ce5a1829d7e7a6601378e5b3f78.png'),
+('garga ergre ar erg a', 'ergqergq erg qreg qe', 4.545324422386921e20, '05/11/2018', 'produto 7', 61, 1, 'b84b3044913a28055d689c8ba855412c.jpg'),
+('gsdfgsdfgsdf sgdf gd', 'ehfuahfuah', 455345340416, '05/11/2018', 'fornecedor 10', 62, 1, 'f99b61d86dfa634630d9ee25dd35a6ab.jpg'),
+('dgfsdfg sdfg sdfg sd', 'produto 1', 444, '05/11/2018', 'fornecedor 10', 63, 1, '798049555a0f7d6fc43afdf6f92ed91e.jpg');
 
 -- --------------------------------------------------------
 
@@ -92,8 +98,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`) VALUES
 (11, '1', '1', '2018-08-27', '1', 0),
-(16, 'teste', 'teste@teste.com', '2018-10-01', '29a2c3d7a6b729c3db4bb4a57f7bfff7d6679119', 0),
-(17, 'Jimi Togni', 'ana@ana.com', '2018-10-01', '72019bbac0b3dac88beac9ddfef0ca808919104f', 0);
+(20, 'jimi', 'jimi', '2018-11-04', '341322', 0);
 
 -- --------------------------------------------------------
 
@@ -155,7 +160,7 @@ ALTER TABLE `cardapio`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT de tabela `receita`
 --
@@ -165,7 +170,7 @@ ALTER TABLE `receita`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de tabela `videos`
 --

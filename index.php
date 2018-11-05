@@ -1,7 +1,23 @@
 <?php
 
 #arquivo de configurações
-require_once 'config/config.php';
+$include0 = 'config/config.php';
+$include1 = '../config/config.php';
+$include2 = '../../config/config.php';
+$include3 = '../../../config/config.php';
+
+#arquivo de configurações
+if(file_exists($include0)){
+  include_once 'config/config.php';
+}elseif (file_exists($include1)){
+  include_once '../config/config.php';
+}elseif (file_exists($include2)){
+  include_once '../../config/config.php';
+}elseif (file_exists($include3)){
+  include_once '../../../config/config.php';
+}else{
+  echo "NÃO INCLUIU NADA DAS CONFIGS";
+}
 
 //BUSCANDO AS CLASSES
 require_once DIRCLASS. 'Usuario.class.php';

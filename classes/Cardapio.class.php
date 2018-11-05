@@ -15,7 +15,8 @@ class Cardapio {
 	private $itensCard;
 	private $descricaoCard;
 	private $dataCard;
-  	private $publicadoCard;
+	private $diaDaSemana;
+	private $publicadoCard;
 
 	//CONSTRUTOR
 	public function __construct(){
@@ -35,7 +36,7 @@ class Cardapio {
 	public function selecionaUmCard($dado){
 		try{
 			$this->idCard = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT  `idCard`, `tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `publicadoCard` FROM `cardapio` WHERE `idCard` = :idCard;");
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `cardapio` WHERE `idCard` = :idCard;");
 			$cst->bindParam(":idCard", $this->idCard, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
@@ -62,16 +63,19 @@ class Cardapio {
 			$this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);
 			$this->itensCard = $dados['itensCard'];
 			$this->descricaoCard = $this->objfc->tratarCaracter($dados['descricaoCard'], 1);
-      		$this->dataCard = $dados['dataCard'];
+      $this->dataCard = $dados['dataCard'];
+			$this->diaDaSemana = $dados['diadasemana'];
+			$this->publicadoCard = $dados['publicadoCard'];
       		//$this->publicadoCard = $dados['publicadoCard'];
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`) VALUES (:tituloCard, :itensCard, :descricaoCard, :dataCard);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `cardapio` (`tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `diadasemana`, `publicadoCard`) VALUES (:tituloCard, :itensCard, :descricaoCard, :dataCard, :diaDaSemana, :publicadoCard);");
 
 			$cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
 			$cst->bindParam(":itensCard", $this->itensCard, PDO::PARAM_STR);
 			$cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
-			//$cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
+			$cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
 			$cst->bindParam(":dataCard", $this->dataCard, PDO::PARAM_STR);
+			$cst->bindParam(":diadasemana", $this->diaDaSemana, PDO::PARAM_STR);
 
 			if($cst->execute()){
 				return 1;

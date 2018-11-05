@@ -4,7 +4,7 @@ include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
 
 //CRIANDO A CLASSE
-class Produto {
+class Evento {
 
 	//ATRIBUTOS
 	private $con;

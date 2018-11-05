@@ -14,9 +14,11 @@ class Produto {
 	private $nomeProduto;
 	private $descricaoProduto;
 	private $preco;
+	private $publicado;
 	private $dataCadastro;
 	private $vencimento;
 	private $fornecedor;
+	private $diaDaSemana;
 	private $foto;
 
 
@@ -51,7 +53,7 @@ class Produto {
 
 	public function selecionaTudo(){
 		try{
-			$cst = $this->con->conectar()->prepare("SELECT `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos`");
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `produtos`");
 			$cst->execute();
 			return $cst->fetchAll();
 		}catch(PDOException $e){
@@ -65,100 +67,130 @@ class Produto {
 			$this->nomeProduto = $this->objfc->tratarCaracter($dados['nomeProduto'], 1);
 			$this->descricaoProduto = $this->objfc->tratarCaracter($dados['descricaoProduto'], 1);
 			$this->preco = $dados['preco'];
-			//$this->foto = $dados['foto111'];
+			$this->publicado = $dados['publicado'];
+			$this->diaDaSemana = $dados['diaDaSemana'];
+			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
+			$this->dataCadastro = date("d/m/Y");
+			//$fotoup = $_FILES['userfile']['name'];
 			//$this->dataCadastro = $this->objfc->dataAtual(2);
 			//$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			//$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
-
-			
-			//$cst->bindParam(":dataCadastro", $this->dataCadastro, PDO::PARAM_STR);
 			//$cst->bindParam(":vencimento", $this->vencimento, PDO::PARAM_STR);
 			//$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
 
 			// Recupera os dados dos campos
-	
-	// Se a foto estiver sido selecionada
-			if (!empty($foto111["name"])) {
-				
-				// Largura máxima em pixels
-				$largura = 2000;
-				// Altura máxima em pixels
-				$altura = 3000;
-				// Tamanho máximo do arquivo em bytes
-				$tamanho = 5000;
 
-				$error = array();
+			// Se a foto estiver sido selecionada
+			//if (!empty($_FILES['userfile'])) {
+
+				// Largura máxima em pixels
+				//$largura = 2000;
+				// Altura máxima em pixels
+				//$altura = 3000;
+				// Tamanho máximo do arquivo em bytes
+				//$tamanho = 5000;
+
+				//$error = array();
 
 				// Verifica se o arquivo é uma imagem
-				if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $foto111["type"])){
-			 	   $error[1] = "Isso não é uma imagem.";
-				 	} 
+				//if(!preg_match("/^image\/(pjpeg|jpeg|png|gif|bmp)$/", $_FILES['userfile']['name'])){
+			 	  // $error[1] = "Isso não é uma imagem.";
+				//}
 
 				// Pega as dimensões da imagem
-				$dimensoes = getimagesize($foto111["tmp_name"]);
+				//$dimensoes = getimagesize($_FILES['userfile']['name']);
 
 				// Verifica se a largura da imagem é maior que a largura permitida
-				if($dimensoes[0] > $largura) {
-					$error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
-				}
+				//if($dimensoes[0] > $largura) {
+				//	$error[2] = "A largura da imagem não deve ultrapassar ".$largura." pixels";
+				//}
 
 				// Verifica se a altura da imagem é maior que a altura permitida
-				if($dimensoes[1] > $altura) {
-					$error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
-				}
-				
+				//if($dimensoes[1] > $altura) {
+				//	$error[3] = "Altura da imagem não deve ultrapassar ".$altura." pixels";
+				//}
+
 				// Verifica se o tamanho da imagem é maior que o tamanho permitido
-				if($foto111["size"] > $tamanho) {
-					 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
-				}
+				//if($fotoup["size"] > $tamanho) {
+				//	 	$error[4] = "A imagem deve ter no máximo ".$tamanho." bytes";
+				//}
 
 				// Se não houver nenhum erro
-				if (count($error) == 0) {
-				
+				//if (count($error) == 0) {
+
 					// Pega extensão da imagem
-					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $foto111["name"], $ext);
+					preg_match("/\.(gif|bmp|png|jpg|jpeg){1}$/i", $_FILES['userfile']['name'], $ext);
+
+					//$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+
+					$uploaddir = '/var/www/html/php/phpoopdo/img/';
+
+					$nomedafoto = md5(uniqid(time())) . "." . $ext[1];
+
+					$uploadfile = '/var/www/html/php/phpoopdo/img/'.$nomedafoto;
+
+					echo "<br> nomedafoto: ".$nomedafoto;
+					echo "<br> <br> uploadfile: ".$uploadfile;
+					echo "<br> <br>";
+
+					if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)){
+					echo "Arquivo válido e enviado com sucesso.\n";
+					} else {
+					echo "Possível ataque de upload de arquivo!\n";
+					}
 
 			    	// Gera um nome único para a imagem
-			    	$nome_imagem = md5(uniqid(time())) . "." . $ext[1];
+			    	//$nome_imagem = basename($_FILES['userfile']['name']);
 
 			    	// Caminho de onde ficará a imagem
-			    	$caminho_imagem = "img/" . $nome_imagem;
+			    	//$caminho_imagem = "/var/www/html/php/phpoopdo/img/" . $nome_imagem;
 
 					// Faz o upload da imagem para seu respectivo caminho
-					move_uploaded_file($foto111["tmp_name"], $caminho_imagem);
-				
-					$this->foto111 = $nome_imagem;
+					//move_uploaded_file($fotoup["tmp_name"], $caminho_imagem);
+
+					//$fotoup = $nome_imagem;
 					// Insere os dados no banco
-					$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `urlimagem`) VALUES (:nomeProduto, :descricaoProduto, :preco, :imagem);");
+					/*$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`) VALUES (:nomeProduto, :descricaoProduto, :preco);");
 
 					$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
 					$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
 					$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
-					$cst->bindParam(":imagem", $this->foto, PDO::PARAM_STR);
-					
-				}
+					//$cst->bindParam(":imagem", $this->foto, PDO::PARAM_STR);
 
-				// Se houver mensagens de erro, exibe-as
-				if (count($error) != 0) {
-					foreach ($error as $erro) {
-						echo $erro . "<br />";
-					}
-				}
-			
+					// Se houver mensagens de erro, exibe-as
+					if (count($error) != 0) {
+						foreach ($error as $erro) {
+							echo $erro . "<br />";
+						}*/
+					//}
+				//}
+			//}
+			print_r($_FILES);
+
+			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`, `urlimagem`, `diadasemana`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor, :urlimagem, :diaDaSemana);");
 
 
-					if($cst->execute()){
-						return 'ok';
-					}else{
-						return 'Error ao cadastrar';
-					}
-				}
+			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
+			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
+			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
+			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);
+			$cst->bindParam(":datacadastro", $this->dataCadastro, PDO::PARAM_STR);
+			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
+			$cst->bindParam(":urlimagem", $nomedafoto, PDO::PARAM_STR);
+			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_STR);
 
-			}catch(PDOException $e){
-			return 'Error: '.$e->getMessage();
+
+			if($cst->execute()){
+				return 'ok';
+			}else{
+				return 'Error ao cadastrar';
 			}
 
+		}catch(PDOException $e){
+		return 'Error: '.$e->getMessage();
+		}
 	}
+
 
 
 	public function updade($dados){
