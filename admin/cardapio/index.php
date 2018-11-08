@@ -119,23 +119,14 @@ require_once DIRNAV . 'nav.php';
 
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">
-<<<<<<< HEAD
-                  <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox1" value="1">
-                  <label class="form-check-label" for="inlineCheckbox1">Sim</label>
-=======
                   <input class="form-check-input" type="radio" name="publicadoCard" id="publicadoCard" value="1">
                   <label class="form-check-label" for="publicadoCard">Sim</label>
->>>>>>> f7254fa7d86345f33ce49225f463d9dae8a1da13
+
                 </div>
 
                 <div class="form-check form-check-inline">
-<<<<<<< HEAD
-                  <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox2" value="2">
-                  <label class="form-check-label" for="inlineCheckbox2">Não</label>
-=======
                   <input class="form-check-input" name="publicadoCard" type="radio" id="publicadoCard" value="2">
                   <label class="form-check-label" for="publicadoCard">Não</label>
->>>>>>> f7254fa7d86345f33ce49225f463d9dae8a1da13
                 </div>
                 </br></br>
 
