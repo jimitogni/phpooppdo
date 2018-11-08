@@ -100,9 +100,9 @@ require_once DIRNAV . 'nav.php';
             <div class="list-group-item">
                 <div><?=$rst['tituloCard']?></div>
                 <div>valor: <?echo $rst['descricaoCard']?></div>
-                <div><a href="?acaoP=edit&cardapio=<?=$rst['pk_cardapio']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div><a href="?acao=edit&cardapio=<?php echo $rst['idCard']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
-                <div><a href="?acaoP=delet&cardapio=<?=$rst['pk_cardapio']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acao=delet&cardapio=<?php echo $rst['idCard']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
@@ -115,21 +115,64 @@ require_once DIRNAV . 'nav.php';
             <form name="formCad" action="" method="post">
                 <input class="form-control" name="tituloCard" type="text" required="required"  placeholder="Titulo do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['tituloCard']))?($cardapio['tituloCard']):(''), 2)?>"><br>
 
-                <input class="form-control" name="itensCard" type="text" required="required"  placeholder="Itens do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['itensCard']))?($cardapio['itensCard']):(''), 2)?>"><br>
-
                 <input class="form-control" name="descricaoCard" type="text" placeholder="Descricao do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['descricaoCard']))?($cardapio['descricaoCard']):(''), 2)?>"><br>
-
-                <input class="form-control" name="dataCard" type="text" placeholder="Data do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['dataCard']))?($cardapio['dataCard']):(''), 2)?>"><br>
 
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">
+<<<<<<< HEAD
                   <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox1" value="1">
                   <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+=======
+                  <input class="form-check-input" type="radio" name="publicadoCard" id="publicadoCard" value="1">
+                  <label class="form-check-label" for="publicadoCard">Sim</label>
+>>>>>>> f7254fa7d86345f33ce49225f463d9dae8a1da13
                 </div>
 
                 <div class="form-check form-check-inline">
+<<<<<<< HEAD
                   <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox2" value="2">
                   <label class="form-check-label" for="inlineCheckbox2">Não</label>
+=======
+                  <input class="form-check-input" name="publicadoCard" type="radio" id="publicadoCard" value="2">
+                  <label class="form-check-label" for="publicadoCard">Não</label>
+>>>>>>> f7254fa7d86345f33ce49225f463d9dae8a1da13
+                </div>
+                </br></br>
+
+                <h5>Dias da Semana:</h5>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="1">
+                  <label class="form-check-label" for="diaDaSemana">Segunda</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="2">
+                  <label class="form-check-label" for="diaDaSemana">Terça</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="3">
+                  <label class="form-check-label" for="diaDaSemana">Quarta</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="4">
+                  <label class="form-check-label" for="diaDaSemana">Quinta</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="5">
+                  <label class="form-check-label" for="diaDaSemana">Sexta</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="6">
+                  <label class="form-check-label" for="diaDaSemana">Sabado</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="7">
+                  <label class="form-check-label" for="diaDaSemana">Domingo</label>
                 </div>
 
 

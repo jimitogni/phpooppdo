@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
--- Host: localhost:3306
--- Tempo de geração: 05/11/2018 às 08:29
--- Versão do servidor: 10.1.26-MariaDB-0+deb9u1
--- Versão do PHP: 7.0.30-0+deb9u1
+-- Host: 127.0.0.1
+-- Generation Time: 05-Nov-2018 às 19:15
+-- Versão do servidor: 10.1.13-MariaDB
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,28 +17,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `phpoo`
+-- Database: `phpoo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cardapio`
+-- Estrutura da tabela `cardapio`
 --
 
 CREATE TABLE `cardapio` (
   `idCard` int(2) NOT NULL,
   `tituloCard` varchar(20) NOT NULL,
-  `itensCard` int(2) NOT NULL,
+  `itensCard` int(2) DEFAULT NULL,
   `descricaoCard` varchar(50) DEFAULT NULL,
   `dataCard` date DEFAULT NULL,
-  `publicadoCard` int(2) NOT NULL
+  `publicadoCard` int(2) NOT NULL,
+  `diadasemana` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `cardapio`
+--
+
+INSERT INTO `cardapio` (`idCard`, `tituloCard`, `itensCard`, `descricaoCard`, `dataCard`, `publicadoCard`, `diadasemana`) VALUES
+(3, 'teste', NULL, 'Cardápio da segunda feira', NULL, 1, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `produtos`
+-- Estrutura da tabela `produtos`
 --
 
 CREATE TABLE `produtos` (
@@ -49,25 +57,28 @@ CREATE TABLE `produtos` (
   `fornecedor` varchar(50) DEFAULT NULL,
   `pk_produto` int(11) NOT NULL,
   `publicado` int(2) DEFAULT NULL,
-  `urlimagem` varchar(100) DEFAULT NULL
+  `urlimagem` varchar(100) DEFAULT NULL,
+  `diadasemana` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `produtos`
+-- Extraindo dados da tabela `produtos`
 --
 
-INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `datacadastro`, `fornecedor`, `pk_produto`, `publicado`, `urlimagem`) VALUES
-('produto 1', 'produto 1', 9999, '05/11/2018', 'produto 1', 57, 1, 'c506bfcaa93e1451a8a969cb187bf285.jpeg'),
-('produto 5', 'produto 1', 9999, '05/11/2018', 'produto 1', 58, 1, '3df3f3a6732f00a27cdbb20f90612f8a.jpg'),
-('hquefhauefh', 'ehfuahfuah', 32323232, '05/11/2018', 'produto 1', 59, 1, 'c0ca0ce5a1829d7e7a6601378e5b3f78.png'),
-('garga ergre ar erg a', 'ergqergq erg qreg qe', 4.545324422386921e20, '05/11/2018', 'produto 7', 61, 1, 'b84b3044913a28055d689c8ba855412c.jpg'),
-('gsdfgsdfgsdf sgdf gd', 'ehfuahfuah', 455345340416, '05/11/2018', 'fornecedor 10', 62, 1, 'f99b61d86dfa634630d9ee25dd35a6ab.jpg'),
-('dgfsdfg sdfg sdfg sd', 'produto 1', 444, '05/11/2018', 'fornecedor 10', 63, 1, '798049555a0f7d6fc43afdf6f92ed91e.jpg');
+INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `datacadastro`, `fornecedor`, `pk_produto`, `publicado`, `urlimagem`, `diadasemana`) VALUES
+('hquefhauefh', 'ehfuahfuah', 32323232, '05/11/2018', 'produto 1', 59, 1, 'c0ca0ce5a1829d7e7a6601378e5b3f78.png', NULL),
+('garga ergre ar erg a', 'ergqergq erg qreg qe', 4.545324422386921e20, '05/11/2018', 'produto 7', 61, 1, 'b84b3044913a28055d689c8ba855412c.jpg', NULL),
+('gsdfgsdfgsdf sgdf gd', 'ehfuahfuah', 455345340416, '05/11/2018', 'fornecedor 10', 62, 1, 'f99b61d86dfa634630d9ee25dd35a6ab.jpg', NULL),
+('dgfsdfg sdfg sdfg sd', 'produto 1', 444, '05/11/2018', 'fornecedor 10', 63, 1, '798049555a0f7d6fc43afdf6f92ed91e.jpg', NULL),
+('windows 2', 'windows 2', 3, '05/11/2018', 'windows 2', 65, 1, '36652a660931b00a4b9d77d945b2af27.jpg', 3),
+('windows 2', 'windows 2', 2, '05/11/2018', 'windows', 66, 1, 'ff1106aef0d8ad0a4ab5348c24d41ed0.jpg', 2),
+('windows 2', 'windows 2', 2, '05/11/2018', 'windows 2', 67, 1, 'f2efe4ebc7b59cb4b2879f6ff0d7227f.jpg', 1),
+('windows 5', 'windows 5', 3, '05/11/2018', 'windows 5', 68, 1, '3c31cc21e51a82ffbe0c7da5362b8199.jpg', 5);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `receita`
+-- Estrutura da tabela `receita`
 --
 
 CREATE TABLE `receita` (
@@ -80,7 +91,7 @@ CREATE TABLE `receita` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuarios`
+-- Estrutura da tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -93,7 +104,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `usuarios`
+-- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`) VALUES
@@ -103,7 +114,7 @@ INSERT INTO `usuarios` (`pk`, `nome`, `email`, `data_cadastro`, `senha`, `nivel`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `videos`
+-- Estrutura da tabela `videos`
 --
 
 CREATE TABLE `videos` (
@@ -114,65 +125,65 @@ CREATE TABLE `videos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Índices de tabelas apagadas
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `cardapio`
+-- Indexes for table `cardapio`
 --
 ALTER TABLE `cardapio`
   ADD PRIMARY KEY (`idCard`);
 
 --
--- Índices de tabela `produtos`
+-- Indexes for table `produtos`
 --
 ALTER TABLE `produtos`
   ADD PRIMARY KEY (`pk_produto`);
 
 --
--- Índices de tabela `receita`
+-- Indexes for table `receita`
 --
 ALTER TABLE `receita`
   ADD PRIMARY KEY (`idreceira`);
 
 --
--- Índices de tabela `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`pk`);
 
 --
--- Índices de tabela `videos`
+-- Indexes for table `videos`
 --
 ALTER TABLE `videos`
   ADD PRIMARY KEY (`idvideo`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `cardapio`
+-- AUTO_INCREMENT for table `cardapio`
 --
 ALTER TABLE `cardapio`
-  MODIFY `idCard` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `idCard` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT de tabela `produtos`
+-- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `pk_produto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
--- AUTO_INCREMENT de tabela `receita`
+-- AUTO_INCREMENT for table `receita`
 --
 ALTER TABLE `receita`
   MODIFY `idreceira` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `pk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT de tabela `videos`
+-- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
   MODIFY `idvideo` int(5) NOT NULL AUTO_INCREMENT;

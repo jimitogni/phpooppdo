@@ -20,6 +20,9 @@ if(file_exists($include0)){
 }
 
 //BUSCANDO AS CLASSES
+
+
+
 require_once DIRCLASS. 'Usuario.class.php';
 
 //echo "<br><br> inserindo classe ususario<br>";
@@ -34,10 +37,10 @@ if(isset($_POST['btLogar'])){
 	$objFunc->logaUsuario($_POST);
 }
 
-//echo DIRROOT. "<br>";
-//echo DIRADMIN. "<br>";
-//echo DIRCLASS. "<br>";
-//echo DIRNAV. "<br>";
+echo DIRROOT. "<br>";
+echo DIRADMIN. "<br>";
+echo DIRCLASS. "<br>";
+echo DIRNAV. "<br>";
 
 
 ?>

@@ -42,6 +42,8 @@ if(file_exists($include0)){
 }
 
 //inclue o menu
+//echo DIRROOT;
+//echo DIRPAGE;
 require_once DIRNAV. 'nav.php';
 ?>
 
