@@ -165,6 +165,8 @@ class Produto {
 			//}
 			print_r($_FILES);
 
+			print_r($dados);
+
 			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`nome_produto`, `descricao_produto`, `valor_produto`, `publicado`, `datacadastro`, `fornecedor`, `urlimagem`, `diadasemana`) VALUES (:nomeProduto, :descricaoProduto, :preco, :publicado, :datacadastro, :fornecedor, :urlimagem, :diaDaSemana);");
 
 

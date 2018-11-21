@@ -77,6 +77,7 @@ class Cardapio {
 			}else{
 				return 'Error ao cadastrar';
 			}
+
 		}catch(PDOException $e){
 			return 'Error: '.$e->getMessage();
 		}
@@ -85,21 +86,27 @@ class Cardapio {
 
 	public function updade($dados){
 		try{
-      $this->idCard = $this->objfc->tratarCaracter($dados['idCard'], 1);
-      $this->tituloCard = $this->objfc->tratarCaracter($dados['tituloCard'], 1);	  
-	  $this->descricaoCard = $this->objfc->tratarCaracter($dados['descricaoCard'], 1);
-      $this->publicadoCard = $dados['publicadoCard'];
+			
+	      $this->idCard = $this->objfc->base64($dados['func'], 2);
+	      $this->tituloCard = $dados['tituloCard'];	  
+		  $this->descricaoCard = $dados['descricaoCard'];
+	      $this->publicadoCard = $dados['publicadoCard'];
+	      $this->diaDaSemana = $dados['diaDaSemana'];
 
-      $cst = $this->con->conectar()->prepare("UPDATE `cardapio` SET `tituloCard`=:tituloCard, `itensCard`=:itensCard, `descricaoCard`=:descricaoCard, `dataCard`=:dataCard, `publicadoCard`=:publicadoCard WHERE `idCard`=:idCard;");
+	      
+	      $cst = $this->con->conectar()->prepare("UPDATE `cardapio` SET `tituloCard` = :tituloCard, `descricaoCard` = :descricaoCard, `publicadoCard` = :publicadoCard, `diaDaSemana` = :diaDaSemana WHERE `idCard` = :idCard;");
 
-      $cst->bindParam(":idCard", $this->idCard, PDO::PARAM_STR);
-	  $cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
-	  $cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
-      $cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
-			if($cst->execute()){
-				return '1';
+	      $cst->bindParam(":idCard", $this->idCard, PDO::PARAM_STR);
+		  $cst->bindParam(":tituloCard", $this->tituloCard, PDO::PARAM_STR);
+		  $cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
+	      $cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
+	      $cst->bindParam(":diaDaSemana", $this->publicadoCard, PDO::PARAM_STR);
+			
+			if ($cst->execute()){
+				return 1;
+				echo "inserido com sucesso";
 			}else{
-				return 'Error ao alterar';
+				echo "Erro ao inserir";
 			}
 		}catch(PDOException $e){
 			return 'Error: '.$e->getMessage();

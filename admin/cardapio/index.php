@@ -31,7 +31,7 @@ $objFc = new Funcoes();
 //CADASTRANDO
 if(isset($_POST['btCadastrar'])){
     if($objCardapio->insere($_POST) == 1){
-        header('location: ');
+        //header('location: ');
         echo '<script type="text/javascript">alert("DEU CERTO");</script>';
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -40,10 +40,10 @@ if(isset($_POST['btCadastrar'])){
 
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
-    if($objCardapio->updade($_POST) == 'ok'){
-        header('location: ?acao=edit&usuario='.$_GET['usuario']);
+      if($objCardapio->updade($_POST) == 1){
+        echo '<script type="text/javascript">alert("Cardapio alterado com sucesso");</script>';
     }else{
-        echo '<script type="text/javascript">alert("Erro em atualizar");</script>';
+        echo '<script type="text/javascript">alert("Erro em atualizar Cardapio");</script>';
     }
 }
 
@@ -113,6 +113,7 @@ require_once DIRNAV . 'nav.php';
 <!-- FORMULARIO PARA CRIAR -->
     <div class="panel panel-primary list-group col-6 border bg-light">
             <form name="formCad" action="" method="post">
+
                 <input class="form-control" name="tituloCard" type="text" required="required"  placeholder="Titulo do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['tituloCard']))?($cardapio['tituloCard']):(''), 2)?>"><br>
 
                 <input class="form-control" name="descricaoCard" type="text" placeholder="Descricao do Cardápio:" value="<?=$objFc->tratarCaracter((isset($cardapio['descricaoCard']))?($cardapio['descricaoCard']):(''), 2)?>"><br>
@@ -167,9 +168,9 @@ require_once DIRNAV . 'nav.php';
                 </div>
 
 
-                <button type="submit" name="<?=(isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>
+                <button type="submit" name="<?= (isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>
 
-                <input type="hidden" name="func" value="<?=(isset($cardapio['idCard']))?($objFc->base64($cardapio['idCard'], 1)):('')?>">
+                <input type="hidden" name="func" value="<?= (isset($cardapio['idCard']))?($objFc->base64($cardapio['idCard'], 1)):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->

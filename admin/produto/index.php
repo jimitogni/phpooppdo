@@ -30,6 +30,7 @@ $objFc = new Funcoes();
 
 //CADASTRANDO O Produto
 if(isset($_POST['btCadastrarProduto'])){
+  echo '<script type="text/javascript">alert("Passou por aqui");</script>';
     if($objProduto->insereProduto($_POST) == 'ok'){
         header('location: ');
     }else{
