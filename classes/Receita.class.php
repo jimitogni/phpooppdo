@@ -10,12 +10,12 @@ class Receita {
 	private $con;
 	private $objfc;
 
-	private $idReceita;
-	private $tituloReceita;
-	private $preparoReceita;
+	private $idRec;
+	private $tituloRec;
+	private $descRec;
 	private $ingredientesReceita;
 	private $dataReceita;
-  private $publicadaReceita;
+  	private $pubRec;
 
 	//CONSTRUTOR
 	public function __construct(){
@@ -34,9 +34,9 @@ class Receita {
 
 	public function selecionaUmReceita($dado){
 		try{
-			$this->idReceita = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT  `idReceita`, `titulo`, `preparo`, `ingredientes`, `datacriacao`, `publicada` FROM `receita` WHERE `idReceita` = :idReceita;");
-			$cst->bindParam(":idReceita", $this->idReceita, PDO::PARAM_INT);
+			$this->idRec = $dado;
+			$cst = $this->con->conectar()->prepare("SELECT  * FROM `receita` WHERE `idRec` = :idRec;");
+			$cst->bindParam(":idRec", $this->idReceita, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
 			}
@@ -57,20 +57,20 @@ class Receita {
 	}
 
 
-	public function insereProduto($dados){
+	public function insereRec($dados){
 		try{
-			$this->tituloReceita = $this->objfc->tratarCaracter($dados['tituloReceita'], 1);
-			$this->preparoReceita = $this->objfc->tratarCaracter($dados['preparoReceita'], 1);
-			$this->ingredientesReceita = $this->objfc->tratarCaracter($dados['ingredientesReceita'], 1);
-      $this->dataReceita = $this->$dados['dataReceita'];
-      $this->publicadaReceita = $this->$dados['publicadaReceita'];
+			$this->tituloRec = $this->objfc->tratarCaracter($dados['tituloRec'], 1);
+			$this->descRec = $this->objfc->tratarCaracter($dados['descRec'], 1);
+			//$this->ingRec = $this->objfc->tratarCaracter($dados['ingRec'], 1);
+      		//$this->dataReceita = date('dd/mm/Y');
+      		$this->pubRec = $this->$dados['pubRec'];
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `produtos` (`titulo`, `preparo`, `ingredientes`, `datacriacao`, `publicada`) VALUES (:tituloReceita, :publicadaReceita, :preparoReceita, :ingredientesReceita, :dataReceita);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `receita` (`tituloRec`, `descRec`, `pubRec`, `datacriacao`) VALUES (:tituloRec, :descRec, :pubRec, :datacriacao);");
 
-			$cst->bindParam(":tituloReceita", $this->tituloReceita, PDO::PARAM_STR);
-			$cst->bindParam(":publicadaReceita", $this->publicadaReceita, PDO::PARAM_STR);
-			$cst->bindParam(":preparoReceita", $this->preparoReceita, PDO::PARAM_STR);
-			$cst->bindParam(":ingredientesReceita", $this->ingredientesReceita, PDO::PARAM_STR);
+			$cst->bindParam(":tituloRec", $this->tituloRec, PDO::PARAM_STR);
+			$cst->bindParam(":pubRec", $this->pubRec, PDO::PARAM_STR);
+			$cst->bindParam(":descRec", $this->descRec, PDO::PARAM_STR);
+			//$cst->bindParam(":ingredientesReceita", $this->ingredientesReceita, PDO::PARAM_STR);
 			$cst->bindParam(":dataReceita", $this->dataReceita, PDO::PARAM_STR);
 
 
