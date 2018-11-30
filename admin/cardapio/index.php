@@ -32,6 +32,7 @@ $objFc = new Funcoes();
 if(isset($_POST['btCadastrar'])){
     if($objCardapio->insere($_POST) == 1){
         //header('location: ');
+        header ("location: /phpooppdo/admin/cardapio/");
         echo '<script type="text/javascript">alert("DEU CERTO");</script>';
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -41,7 +42,11 @@ if(isset($_POST['btCadastrar'])){
 //ALTERANDO OS DADOS DO FUNCIONARIO
 if(isset($_POST['btAlterar'])){
       if($objCardapio->updade($_POST) == 1){
+        
         echo '<script type="text/javascript">alert("Cardapio alterado com sucesso");</script>';
+        
+        header ("location: /phpooppdo/admin/cardapio/");
+
     }else{
         echo '<script type="text/javascript">alert("Erro em atualizar Cardapio");</script>';
     }
@@ -99,7 +104,7 @@ require_once DIRNAV . 'nav.php';
             <?php foreach($objCardapio->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
                 <div><?=$rst['tituloCard']?></div>
-                <div>valor: <?echo $rst['descricaoCard']?></div>
+                <div>valor: <?php echo $rst['descricaoCard']?></div>
                 <div><a href="?acao=edit&cardapio=<?php echo $rst['idCard']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
                 <div><a href="?acao=delet&cardapio=<?php echo $rst['idCard']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>

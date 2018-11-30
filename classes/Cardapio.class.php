@@ -101,6 +101,16 @@ class Cardapio {
 		  $cst->bindParam(":descricaoCard", $this->descricaoCard, PDO::PARAM_STR);
 	      $cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
 	      $cst->bindParam(":diaDaSemana", $this->publicadoCard, PDO::PARAM_STR);
+
+	      		echo "-----------------";
+
+		print_r ($dados);
+
+		echo "<br>-----------------soh o id: ";
+
+		echo $this->idCard;
+
+		echo "-----------------";
 			
 			if ($cst->execute()){
 				return 1;
