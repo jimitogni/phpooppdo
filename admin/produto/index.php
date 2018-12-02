@@ -38,6 +38,14 @@ if(isset($_POST['btCadastrarProduto'])){
     }
 }
 
+if(isset($_POST['btAlterarProduto'])){
+    if($objProduto->update($_POST) == 1){
+        echo '<script type="text/javascript">alert("OK");</script>';
+    }else{
+        echo '<script type="text/javascript">alert("Erro da INDEX em alterar");</script>';
+    }
+}
+
 //SELECIONADO UM PRODUTO OU ANUNCI
 if(isset($_GET['acaoP'])){
     switch($_GET['acaoP']){
@@ -172,7 +180,7 @@ require_once DIRNAV . 'nav.php';
 
                 <button type="submit" name="<?=(isset($_GET['acaoP']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acaoP']) == 'edit')?('Alterar'):('Cadastrar')?></button>
 
-                <input type="hidden" name="func" value="<?=(isset($produto['pk']))?($objFc->base64($produto['pk'], 1)):('')?>">
+                <input type="hidden" name="func" value="<?=(isset($produto['pk_produto']))?($objFc->base64($produto['pk_produto'], 1)):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->

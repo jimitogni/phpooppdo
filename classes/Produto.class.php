@@ -11,6 +11,7 @@ class Produto {
 	private $objfc;
 
 	private $idProduto;
+	private $id;
 	private $nomeProduto;
 	private $descricaoProduto;
 	private $preco;
@@ -194,24 +195,56 @@ class Produto {
 
 
 
-	public function updade($dados){
+	public function update($dados){
 		try{
-			$this->idUsuario = $this->objfc->base64($dados['func'], 2);
-			$this->nome = $dados['nome'];
-			$this->email = $dados['email'];
-			$cst = $this->con->conectar()->prepare("UPDATE `usuarios` SET `nome` = :nome, `email` = :email WHERE `pk` = :idUsuario;");
-			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
-			$cst->bindParam(":nome", $this->nome, PDO::PARAM_STR);
-			$cst->bindParam(":email", $this->email, PDO::PARAM_STR);
+			$this->id = $dados['func'];
+			$this->idProduto = $this->objfc->base64($dados['func'], 2);
+			$this->nomeProduto = $dados['nomeProduto'];
+			$this->descricaoProduto = $dados['descricaoProduto'];
+			$this->preco = $dados['preco'];
+			//$this->dataCadastro = $dados['datacadastro'];
+			$this->fornecedor = $dados['fornecedor'];
+			$this->publicado = $dados['publicado'];
+			$this->urlimagem = $dados['urlimagem'];
+			$this->diaDaSemana = $dados['diaDaSemana'];
+			
+		print_r ($dados);
+		echo "<br>-----------------soh o id: ";
+		echo $this->idProduto;
+		echo "-----------------";
+		echo "<br>---antes do sql----<br>";
+			
+			$cst = $this->con->conectar()->prepare("UPDATE `produtos` SET `nome_produto` = :nomeProduto, `descricao_produto` = :descricaoProduto, `valor_produto` = 222, `fornecedor` = ':fornecedor', `publicado` = 1, `urlimagem` = ':urlimagem', `diadasemana` = 1 WHERE `pk_produto` = :idProduto;");
+
+			$cst->bindParam(":id", $this->id, PDO::PARAM_STR);
+			$cst->bindParam(":idProduto", $this->idProduto, PDO::PARAM_STR);
+			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
+			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
+			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
+			//$cst->bindParam(":datacadastro", $this->datacadastro, PDO::PARAM_STR);
+			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
+			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);
+			$cst->bindParam(":urlimagem", $nomedafoto, PDO::PARAM_STR);
+			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_STR);
+
+		print_r ($dados);
+
+		echo "<b><br>-------->>>> idProduto: ". $this->idProduto ."<<<--- essa eh a ID do idProduto</b>";
+
+		echo "<b><br>-------->>>> id: ". $this->id ."<<<--- essa eh a ID do id</b>";
+
+		echo "-----------------";
+
 			if($cst->execute()){
-				return 'ok';
+				return 1;
 			}else{
-				return 'Error ao alterar';
+				return 'Error ao alterar NA CLASSE';
 			}
 		}catch(PDOException $e){
 			return 'Error: '.$e->getMessage();
 		}
 	}
+
 
 	public function delete($dado){
 		try{

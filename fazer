@@ -1,14 +1,46 @@
 fazer
 
-Sei que falou que ia colocando os vídeos lá, queria que fizesse um mostrando como faz pra exibir a pag receitas (e se n for pedir de mais se add uma aba para imagem da receita)
-Da parte do adm
+eu
+
+----USUARIOS
+nivel do usuário cadastrado, só o admin cadastra
+Fazer logoff e sair
+
+----CARDAPIOS
+Lisar os cardapios pelas semanas, foreach view
+
+----EVENTOS
+Upload da imagem de evento
+
+----PRODUTOS
+upload da imagem de add produto ta bugada <-- Resolvido, permissao na pasta
+editar produto tbm nao funciona
 
 
-Falta arrumar a parte de adicionar, alterar e excluir do cardápio. Por enquanto só tá adicionando, mas tem coisa que não mostrar, tipo o preço
-Falta o código pra direcionar os pratos pros dias certos da semana, se ele vai pra segunda, terça ou outro
-Falta o upload de imagem da página eventos e promoções
+
+/////////////////////////////////////
 
 E de dificuldade estamos tendo em fazer todas essas coisas
 E tbm o fale conosco e receba nossas novidades
 Eu fiz os arquivos, mas não tenho ctz se estão certos e tals
+
+falta quando o usuario for normal ele logar e voltar pra pagina inicial e mostrar que ele esta logado
+
+Aí só precisa colocar o nível Ali, e bloquear para os funcionários não excluírem os usuarios
+[14:47, 30/11/2018] Paulo 3 Tw: Aí Jimi, vamos deixar o login do administrador só
+[14:47, 30/11/2018] Paulo 3 Tw: Aí lá na página do administrador ele cadastra os funcionários
+[14:47, 30/11/2018] Paulo 3 Tw: Aí quem é usuário padrão nem precisa cadastrar
+
+
+[19:28, 30/11/2018] Joao Letícia Tw: Eae Jimi, tudo blz?
+[19:28, 30/11/2018] Joao Letícia Tw: Então, lembra daquele foreach que vc me ensionou pra poder selecionar os itens de algum dia da semana?
+[19:29, 30/11/2018] Joao Letícia Tw: Vc poderia me mostrar um exemplo, por favor? É que eu fiz aqui, mas não me lembro de tudo, então deve tá faltando coisa
+
+Falta o código pra direcionar os pratos pros dias certos da semana, se ele vai pra segunda, terça ou outro
+Falta o upload de imagem da página eventos e promoções
+E de dificuldade estamos tendo em fazer todas essas coisas
+E tbm o fale conosco e receba nossas novidades
+Eu fiz os arquivos, mas não tenho ctz se estão certos e tals
+
+-----------
 

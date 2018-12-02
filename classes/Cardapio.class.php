@@ -102,7 +102,7 @@ class Cardapio {
 	      $cst->bindParam(":publicadoCard", $this->publicadoCard, PDO::PARAM_STR);
 	      $cst->bindParam(":diaDaSemana", $this->publicadoCard, PDO::PARAM_STR);
 
-	      		echo "-----------------";
+	    echo "-----------------";
 
 		print_r ($dados);
 
