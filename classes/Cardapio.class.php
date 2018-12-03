@@ -58,7 +58,7 @@ class Cardapio {
 		}
 	}
 
-	public function selecionaUmSemana($dado){
+	public function selecionaDia($dado){
 		try{
 			$cst = $this->con->conectar()->prepare("SELECT * FROM `cardapio` WHERE `diadasemana` = ". $dado .";");
 			$cst->execute();
