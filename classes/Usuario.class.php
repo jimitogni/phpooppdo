@@ -137,7 +137,7 @@ class Usuario {
 
 	public function logaUsuario($dados){
 		$this->email = $dados['email'];
-		$this->senha = $dados['senha'];
+		$this->senha = sha1($dados['senha']);
 		try{
 			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nivel`, `email`, `senha` FROM `usuarios` WHERE `email` = :email AND `senha` = :senha;");
 			$cst->bindParam(':email', $this->email, PDO::PARAM_STR);

@@ -1,4 +1,16 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
 #inicia a sessao do usuario
 session_start();
 

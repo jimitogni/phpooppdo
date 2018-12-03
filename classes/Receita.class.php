@@ -1,4 +1,16 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
 //BUSCANDO AS CLASSES
 include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
@@ -65,7 +77,8 @@ class Receita {
       		//$this->dataReceita = date('dd/mm/Y');
       		$this->pubRec = $this->$dados['pubRec'];
 
-			$cst = $this->con->conectar()->prepare("INSERT INTO `receita` (`tituloRec`, `descRec`, `pubRec`, `datacriacao`) VALUES (:tituloRec, :descRec, :pubRec, :datacriacao);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `receita` (`tituloRec`, `descRec`, `pubRec`, `datacriacao`) 
+													VALUES (:tituloRec, :descRec, :pubRec, :datacriacao);");
 
 			$cst->bindParam(":tituloRec", $this->tituloRec, PDO::PARAM_STR);
 			$cst->bindParam(":pubRec", $this->pubRec, PDO::PARAM_STR);

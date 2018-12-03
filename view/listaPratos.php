@@ -1,4 +1,16 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
 #arquivo de configurações
 $include0 = 'config/config.php';
 $include1 = '../config/config.php';
@@ -122,20 +134,21 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(1) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(1) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
       <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200" alt="Imagem do produto">
-      <span class="card-title"><?=$rst['nome_produto']?></span>
+      <span class="card-title"><?=$rst['tituloCard']?></span>
     </div>
     <div class="card-content">
-        <div>Prato: <?php echo $rst['tituloCard']?></div>
-        <div>Publicado: <?php echo $rst['publicadoCard']?></div>
-        <div>Dia da semana: <?php echo $rst['diadasemana']?></div>
+        <?php// print_r($rst); ?>
+        <div>Prato: <?=$rst['tituloCard']?></div>
+        <div>Publicado: <?= $rst['publicadoCard']?></div>
+        <div>Dia da semana: <?= $rst['diadasemana']?></div>
     </div>
     <div class="card-action">
-      <a href="#">Valor: <?php echo $rst['valor_produto']?></a>
+      <a href="#">Valor: <?= $rst['tituloCard']?></a>
     </div>
   </div>
 </div>
@@ -153,7 +166,7 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(2) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(2) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
@@ -184,7 +197,7 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(3) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(3) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
@@ -215,7 +228,7 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(4) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(4) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
@@ -246,7 +259,7 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(5) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(5) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
@@ -277,7 +290,7 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(6) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(6) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
@@ -308,7 +321,7 @@ $objFc = new Funcoes();
 
 <div class="row">
 
-<?php foreach($objProduto->selecionaUmSemana(7) as $rst){ ?>
+<?php foreach($objProduto->selecionaDia(7) as $rst){ ?>
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">

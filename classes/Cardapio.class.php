@@ -1,4 +1,16 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
 //BUSCANDO AS CLASSES
 include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
@@ -48,12 +60,9 @@ class Cardapio {
 
 	public function selecionaUmSemana($dado){
 		try{
-			$this->diaDaSemana = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT * FROM `cardapio` WHERE `diadasemana` = :diaDaSemana;");
-			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_INT);
-			if($cst->execute()){
-				return $cst->fetch();
-			}
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `cardapio` WHERE `diadasemana` = ". $dado .";");
+			$cst->execute();
+			return $cst->fetchAll();
 		}catch(PDOException $e){
 			return 'Error: '.$e->getMessage();
 		}
