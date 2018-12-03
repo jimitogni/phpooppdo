@@ -1,4 +1,17 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
 #inicia a sessao do usuario
 session_start();
 
@@ -21,34 +34,41 @@ if(file_exists($include0)){
   echo "NÃO INCLUIU NADA DAS CONFIGS";
 }
 
+
 //BUSCANDO A CLASSE
-require_once DIRCLASS. 'Funcoes.class.php';
 require_once DIRCLASS. 'Produto.class.php';
+require_once DIRCLASS. 'Funcoes.class.php';
 
 $objProduto = new Produto();
 $objFc = new Funcoes();
 
-//CADASTRANDO O Produto
-if(isset($_POST['btCadastrarProduto'])){
-  echo '<script type="text/javascript">alert("Passou por aqui");</script>';
-    if($objProduto->insereProduto($_POST) == 'ok'){
-        header('location: ');
+//CADASTRANDO
+if(isset($_POST['btCadastrar'])){
+    if($objProduto->insereProduto($_POST) == 1){
+        //header('location: ');
+        header ("location: /phpooppdo/admin/produto/");
+        echo '<script type="text/javascript">alert("DEU CERTO");</script>';
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
     }
 }
 
-if(isset($_POST['btAlterarProduto'])){
-    if($objProduto->update($_POST) == 1){
-        echo '<script type="text/javascript">alert("OK");</script>';
+//ALTERANDO OS DADOS
+if(isset($_POST['btAlterar'])){
+      if($objProduto->updateProduto($_POST) == 1){
+        
+        echo '<script type="text/javascript">alert("Cardapio alterado com sucesso");</script>';
+        
+        //header ("location: /phpooppdo/admin/produto/");
+
     }else{
-        echo '<script type="text/javascript">alert("Erro da INDEX em alterar");</script>';
+        echo '<script type="text/javascript">alert("Erro em atualizar Cardapio");</script>';
     }
 }
 
-//SELECIONADO UM PRODUTO OU ANUNCI
-if(isset($_GET['acaoP'])){
-    switch($_GET['acaoP']){
+//SELECIONADO UM
+if(isset($_GET['acao'])){
+    switch($_GET['acao']){
         case 'edit': $produto = $objProduto->selecionaUmProduto($_GET['produto']); break;
         case 'delet':
             if($objProduto->delete($_GET['produto']) == 1){
@@ -60,11 +80,12 @@ if(isset($_GET['acaoP'])){
     }
 }
 
+
 ?>
 
 <!-- BARRA DE NAVEGACAO -->
 <?php
-require_once DIRNAV . 'nav.php';
+include_once DIRNAV . 'nav.php';
 ?>
 <!-- FIM BARRA DE NAVEGACAO -->
 
@@ -83,11 +104,13 @@ require_once DIRNAV . 'nav.php';
 
 <body>
 
-<p></p>
-
+<!-- LISTAGEM DE USUARIOS QUE VEM DO BANCO DE DADOS -->
 <div class="container">
 
-<!-- LISTAR ANUNCIOS -->
+<!-- espaço -->
+<br> <br>
+
+<!-- LISTAR -->
 <div class="row">
     <div class="col-6">
         <div class="border bg-light panel panel-primary list-group">
@@ -95,16 +118,17 @@ require_once DIRNAV . 'nav.php';
             <?php foreach($objProduto->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
                 <div><b>Nome:</b> <?php echo $rst['nome_produto']?></div>
+                <div><b>Descrição:</b> <?php echo $rst['descricao_produto']?></div>
                 <div><b>Fornecedor:</b> <?php echo $rst['fornecedor']?></div>
                 <div><b>Valor:</b> <?php echo $rst['valor_produto']?></div>
-                <div><b>Data de Cadastro:</b> <?print date("d/m/Y");?></div>
+                <div><b>Data de Cadastro:</b> <?php print date("d/m/Y");?></div>
                 <div><b>Publicado:</b> <?php echo $rst['publicado']?></div>
                 <div><b>Dia da semana:</b> <?php echo $rst['diadasemana']?></div>
                 <div>Imagem: <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="100" alt="Imagem do produto"></div>
 
-                <div><a href="?acaoP=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
+                <div><a href="?acao=edit&produto=<?=$rst['pk_produto']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
-                <div><a href="?acaoP=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
+                <div><a href="?acao=delet&produto=<?=$rst['pk_produto']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
             </div>
             <?php } ?>
         </div>
@@ -112,36 +136,37 @@ require_once DIRNAV . 'nav.php';
 
 <!-- FIM LISTAR ANUNCIOS -->
 <!-- CRIAR OU ALTERAR ANUNCIOS -->
-<!-- FORMULARIO PARA CRIAR E ALTERAR anuncis -->
+<!-- FORMULARIO PARA CRIAR -->
     <div class="panel panel-primary list-group col-6 border bg-light">
-            <form name="formCad" action="" method="post" enctype="multipart/form-data">
+            <form name="formCad" action="" method="post">
+
+                <input type="hidden" name="id" value="<?=$objFc->tratarCaracter((isset($produto['pk_produto']))?($produto['pk_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="nomeProduto" type="text" required="required"  placeholder="Produto:" value="<?=$objFc->tratarCaracter((isset($produto['nome_produto']))?($produto['nome_produto']):(''), 2)?>"><br>
 
                 <input class="form-control" name="descricaoProduto" type="text" required="required"  placeholder="Descricao:" value="<?=$objFc->tratarCaracter((isset($produto['descricao_produto']))?($produto['descricao_produto']):(''), 2)?>"><br>
 
-                <input class="form-control" name="fornecedor" type="text" placeholder="Nome do fornecedor:" value="<?=$objFc->tratarCaracter((isset($produto['fornecedor']))?($produto['descricao_produto']):(''), 2)?>"><br>
+                <input class="form-control" name="fornecedor" type="text" placeholder="Fornecedor:" value="<?=isset($produto['fornecedor'])?($produto['fornecedor']):('')?>"><br>
 
                 <input class="form-control" name="preco" type="text" required="required"  placeholder="Preco:" value="<?=$objFc->tratarCaracter((isset($produto['valor_produto']))?($produto['valor_produto']):(''), 2)?>"><br>
 
                 <input type="file" name="userfile"><br><br>
 
 
-
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox1" value="1">
-                  <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+                  <input class="form-check-input" type="radio" name="publicado" id="publicado" value="1">
+                  <label class="form-check-label" for="publicado">Sim</label>
+
                 </div>
 
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="publicado" type="radio" id="inlineCheckbox2" value="2">
-                  <label class="form-check-label" for="inlineCheckbox2">Não</label>
+                  <input class="form-check-input" name="publicado" type="radio" id="publicado" value="2">
+                  <label class="form-check-label" for="publicado">Não</label>
                 </div>
+                </br></br>
 
-                <br><br>
-
-                 <h5>Dias da Semana:</h5>
+                <h5>Dias da Semana:</h5>
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" name="diaDaSemana" type="checkbox" id="diaDaSemana" value="1">
                   <label class="form-check-label" for="diaDaSemana">Segunda</label>
@@ -178,9 +203,9 @@ require_once DIRNAV . 'nav.php';
                 </div>
 
 
-                <button type="submit" name="<?=(isset($_GET['acaoP']) == 'edit')?('btAlterarProduto'):('btCadastrarProduto')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acaoP']) == 'edit')?('Alterar'):('Cadastrar')?></button>
+                <button type="submit" name="<?= (isset($_GET['acao']) == 'edit')?('btAlterar'):('btCadastrar')?>" class="btn btn-primary btn-block"><?=(isset($_GET['acao']) == 'edit')?('Alterar'):('Cadastrar')?></button>
 
-                <input type="hidden" name="func" value="<?=(isset($produto['pk_produto']))?($objFc->base64($produto['pk_produto'], 1)):('')?>">
+                <input type="hidden" name="func" value="<?= (isset($produto['pk_produto']))?($produto['pk_produto']):('')?>">
             </form>
     </div>
 </div> <!-- FIM CRIAR OU ALTERAR ANUNCIOS -->
@@ -189,3 +214,5 @@ require_once DIRNAV . 'nav.php';
 
 </body>
 </html>
+
+

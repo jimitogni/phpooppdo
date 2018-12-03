@@ -1,4 +1,17 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
 //BUSCANDO AS CLASSES
 include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
@@ -41,7 +54,7 @@ class Produto {
 	public function selecionaUmProduto($dado){
 		try{
 			$this->idProduto = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT  `pk_produto`, `nome_produto`, `descricao_produto`, `valor_produto` FROM `produtos` WHERE `pk_produto` = :idProduto;");
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `produtos` WHERE `pk_produto` = :idProduto;");
 			$cst->bindParam(":idProduto", $this->idProduto, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
@@ -183,7 +196,7 @@ class Produto {
 
 
 			if($cst->execute()){
-				return 'ok';
+				return 1;
 			}else{
 				return 'Error ao cadastrar';
 			}
@@ -195,18 +208,16 @@ class Produto {
 
 
 
-	public function update($dados){
+	public function updateProduto($dados){
 		try{
-			$this->id = $dados['func'];
-			$this->idProduto = $this->objfc->base64($dados['func'], 2);
-			$this->nomeProduto = $dados['nomeProduto'];
-			$this->descricaoProduto = $dados['descricaoProduto'];
+			$this->id = $dados['id'];
+			$this->idProduto = $dados['func'];
+			$this->nomeProduto = $this->objfc->tratarCaracter($dados['nomeProduto'], 1);
+			$this->descricaoProduto = $this->objfc->tratarCaracter($dados['descricaoProduto'], 1);
 			$this->preco = $dados['preco'];
-			//$this->dataCadastro = $dados['datacadastro'];
-			$this->fornecedor = $dados['fornecedor'];
 			$this->publicado = $dados['publicado'];
-			$this->urlimagem = $dados['urlimagem'];
 			$this->diaDaSemana = $dados['diaDaSemana'];
+			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 			
 		print_r ($dados);
 		echo "<br>-----------------soh o id: ";
@@ -214,17 +225,22 @@ class Produto {
 		echo "-----------------";
 		echo "<br>---antes do sql----<br>";
 			
-			$cst = $this->con->conectar()->prepare("UPDATE `produtos` SET `nome_produto` = :nomeProduto, `descricao_produto` = :descricaoProduto, `valor_produto` = 222, `fornecedor` = ':fornecedor', `publicado` = 1, `urlimagem` = ':urlimagem', `diadasemana` = 1 WHERE `pk_produto` = :idProduto;");
+			$cst = $this->con->conectar()->prepare("UPDATE `produtos` SET 
+				`nome_produto` = :nomeProduto,
+				`descricao_produto` = :descricaoProduto,
+				`valor_produto` = :preco,
+				`fornecedor` = :fornecedor,
+				`publicado` = :publicado,
+				`diadasemana` = :diaDaSemana 
+				WHERE `pk_produto`=:idProduto;");
 
-			$cst->bindParam(":id", $this->id, PDO::PARAM_STR);
-			$cst->bindParam(":idProduto", $this->idProduto, PDO::PARAM_STR);
+			//$cst->bindParam(":id", $this->id, PDO::PARAM_INT);
+			$cst->bindParam(":idProduto", $this->idProduto, PDO::PARAM_INT);
 			$cst->bindParam(":nomeProduto", $this->nomeProduto, PDO::PARAM_STR);
 			$cst->bindParam(":descricaoProduto", $this->descricaoProduto, PDO::PARAM_STR);
 			$cst->bindParam(":preco", $this->preco, PDO::PARAM_STR);
-			//$cst->bindParam(":datacadastro", $this->datacadastro, PDO::PARAM_STR);
-			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
 			$cst->bindParam(":publicado", $this->publicado, PDO::PARAM_STR);
-			$cst->bindParam(":urlimagem", $nomedafoto, PDO::PARAM_STR);
+			$cst->bindParam(":fornecedor", $this->fornecedor, PDO::PARAM_STR);
 			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_STR);
 
 		print_r ($dados);
