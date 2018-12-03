@@ -42,7 +42,7 @@ class Usuario {
 	public function selecionaUm($dado){
 		try{
 			$this->idUsuario = $dado;
-			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nome`, `email`, `data_cadastro` FROM `usuarios` WHERE `pk` = :idUsuario;");
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `usuarios` WHERE `pk` = :idUsuario;");
 			$cst->bindParam(":idUsuario", $this->idUsuario, PDO::PARAM_INT);
 			if($cst->execute()){
 				return $cst->fetch();
@@ -54,7 +54,7 @@ class Usuario {
 
 	public function selecionaTudo(){
 		try{
-			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nome`, `email`, `data_cadastro` FROM `usuarios`");
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `usuarios`");
 			$cst->execute();
 			return $cst->fetchAll();
 		}catch(PDOException $e){
@@ -67,11 +67,13 @@ class Usuario {
 			$this->nome = $this->objfc->tratarCaracter($dados['nome'], 1);
 			$this->email = $this->objfc->tratarCaracter($dados['email'], 1);
 			$this->senha = sha1($dados['senha']);
+			$this->senha = $dados['nivel'];
 			$this->dataCadastro = $this->objfc->dataAtual(2);
-			$cst = $this->con->conectar()->prepare("INSERT INTO `usuarios` (`nome`, `email`, `senha`, `data_cadastro`) VALUES (:nome, :email, :senha, :data);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `usuarios` (`nome`, `email`, `senha`, `data_cadastro`, nivel`) VALUES (:nome, :email, :senha, :data, :nivel);");
 			$cst->bindParam(":nome", $this->nome, PDO::PARAM_STR);
 			$cst->bindParam(":email", $this->email, PDO::PARAM_STR);
 			$cst->bindParam(":senha", $this->senha, PDO::PARAM_STR);
+			$cst->bindParam(":nivel", $this->nivel, PDO::PARAM_STR);
 			$cst->bindParam(":data", $this->dataCadastro, PDO::PARAM_STR);
 			if($cst->execute()){
 				return 'ok';
