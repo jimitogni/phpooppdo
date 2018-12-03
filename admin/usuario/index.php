@@ -116,6 +116,19 @@ require_once DIRNAV . 'nav.php';
 
                 <input type="mail" name="email" class="form-control" required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  placeholder="E-mail:" value="<?=$objFc->tratarCaracter((isset($usuario['email']))?($usuario['email']):(''), 2)?>"><br>
 
+                <h5>Nivel:</h5>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="nivel" id="nivel" value="1">
+                  <label class="form-check-label" for="nivel">Administrador</label>
+
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" name="nivel" type="radio" id="nivel" value="2">
+                  <label class="form-check-label" for="nivel">Usuário Padrão</label>
+                </div>
+                </br></br>
+
                 <?php if(isset($_GET['acao']) <> 'edit'){ ?>
                 <input type="password" name="senha" class="form-control" required="required" placeholder="Senha:"><br>
                 <?php } ?>
