@@ -1,4 +1,17 @@
 <?php
+ini_set('display_errors',1);
+ini_set('display_startup_erros',1);
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP (see changelog)
+error_reporting(E_ALL);
+
+// Exibe todos os erros PHP
+error_reporting(-1);
+
+// Mesmo que error_reporting(E_ALL);
+ini_set('error_reporting', E_ALL);
+
 //BUSCANDO AS CLASSES
 include_once "Conexao.class.php";
 include_once "Funcoes.class.php";
@@ -67,9 +80,10 @@ class Usuario {
 			$this->nome = $this->objfc->tratarCaracter($dados['nome'], 1);
 			$this->email = $this->objfc->tratarCaracter($dados['email'], 1);
 			$this->senha = sha1($dados['senha']);
-			$this->senha = $dados['nivel'];
+			$this->nivel = $dados['nivel'];
 			$this->dataCadastro = $this->objfc->dataAtual(2);
-			$cst = $this->con->conectar()->prepare("INSERT INTO `usuarios` (`nome`, `email`, `senha`, `data_cadastro`, nivel`) VALUES (:nome, :email, :senha, :data, :nivel);");
+			$cst = $this->con->conectar()->prepare("INSERT INTO `usuarios` (`nome`, `email`, `senha`, `data_cadastro`, `nivel`) 
+													VALUES (:nome, :email, :senha, :data, :nivel);");
 			$cst->bindParam(":nome", $this->nome, PDO::PARAM_STR);
 			$cst->bindParam(":email", $this->email, PDO::PARAM_STR);
 			$cst->bindParam(":senha", $this->senha, PDO::PARAM_STR);
