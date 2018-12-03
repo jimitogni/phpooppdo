@@ -46,6 +46,19 @@ class Cardapio {
 		}
 	}
 
+	public function selecionaUmSemana($dado){
+		try{
+			$this->diaDaSemana = $dado;
+			$cst = $this->con->conectar()->prepare("SELECT * FROM `cardapio` WHERE `diadasemana` = :diaDaSemana;");
+			$cst->bindParam(":diaDaSemana", $this->diaDaSemana, PDO::PARAM_INT);
+			if($cst->execute()){
+				return $cst->fetch();
+			}
+		}catch(PDOException $e){
+			return 'Error: '.$e->getMessage();
+		}
+	}
+
 
 	public function selecionaTudo(){
 		try{
