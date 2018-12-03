@@ -126,7 +126,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200" alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
@@ -157,7 +157,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200"alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
@@ -188,7 +188,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200"alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
@@ -219,7 +219,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200"alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
@@ -250,7 +250,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200"alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
@@ -281,7 +281,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200"alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">
@@ -312,7 +312,7 @@ $objFc = new Funcoes();
 <div class="col s12 m6">
   <div class="card">
     <div class="card-image">
-      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="200" height="700" alt="Imagem do produto">
+      <img src="/phpooppdo/img/<?php echo $rst['urlimagem']?>" width="100" height="200"alt="Imagem do produto">
       <span class="card-title"><?=$rst['nome_produto']?></span>
     </div>
     <div class="card-content">

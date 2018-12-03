@@ -104,7 +104,8 @@ require_once DIRNAV . 'nav.php';
             <?php foreach($objCardapio->selecionaTudo() as $rst){ ?>
             <div class="list-group-item">
                 <div><?=$rst['tituloCard']?></div>
-                <div>valor: <?php echo $rst['descricaoCard']?></div>
+                <div>Descricao: <?php echo $rst['descricaoCard']?></div>
+                <div>Dia da Semana: <?php echo $rst['diadasemana']?></div>
                 <div><a href="?acao=edit&cardapio=<?php echo $rst['idCard']?>" title="Editar dados"><img src="../../img/ico-editar.png" width="16" height="16" alt="Editar"></a></div>
 
                 <div><a href="?acao=delet&cardapio=<?php echo $rst['idCard']?>" title="Excluir esse dado"><img src="../../img/ico-excluir.png" width="16" height="16" alt="Excluir"></a></div>
@@ -125,13 +126,13 @@ require_once DIRNAV . 'nav.php';
 
                 <h5>Publicado:</h5>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="publicadoCard" id="publicadoCard" value="1">
+                  <input class="form-check-input" type="radio" name="publicadoCard" required="required"  id="publicadoCard" value="1">
                   <label class="form-check-label" for="publicadoCard">Sim</label>
 
                 </div>
 
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" name="publicadoCard" type="radio" id="publicadoCard" value="2">
+                  <input class="form-check-input" name="publicadoCard" type="radio" required="required" id="publicadoCard" value="2">
                   <label class="form-check-label" for="publicadoCard">Não</label>
                 </div>
                 </br></br>
