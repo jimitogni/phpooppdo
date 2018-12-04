@@ -138,13 +138,15 @@ class Usuario {
 	public function logaUsuario($dados){
 		$this->email = $dados['email'];
 		$this->senha = sha1($dados['senha']);
+	
 		try{
 			$cst = $this->con->conectar()->prepare("SELECT `pk`, `nivel`, `email`, `senha` FROM `usuarios` WHERE `email` = :email AND `senha` = :senha;");
 			$cst->bindParam(':email', $this->email, PDO::PARAM_STR);
 			$cst->bindParam(':senha', $this->senha, PDO::PARAM_STR);
 			$cst->execute();
 			if($cst->rowCount() == 0){
-				header('location: erro.php');
+				echo "</br><h1><b>NÃO FOI POSSIVEL FAZER O LOGIN, USUÁRIO OU SENHA INVÁLIDOS! </br></h1></b>";
+				//header('location: erro.php');
 			}else{
 				session_start();
 				$rst = $cst->fetch();

@@ -36,12 +36,12 @@ $objFunc = new Usuario();
 if(isset($_POST['btLogar'])){
 	$objFunc->logaUsuario($_POST);
 }
-
+echo "<br><b> Os diretórios da raiz são: <br>";
 echo DIRROOT. "<br>";
 echo DIRADMIN. "<br>";
 echo DIRCLASS. "<br>";
 echo DIRNAV. "<br>";
-
+echo "<br><b> Essa parte é apenas para debug, remover ou comentar quando forem entregar ao cliente ou apresentar o tcc: </b> <br><br><br>";
 
 ?>
 
