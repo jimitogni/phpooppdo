@@ -46,7 +46,7 @@ $objFc = new Funcoes();
 if(isset($_POST['btCadastrar'])){
     if($objProduto->insereProduto($_POST) == 1){
         //header('location: ');
-        header ("location: /phpooppdo/admin/produto/");
+        //header ("location: /phpooppdo/admin/produto/");
         echo '<script type="text/javascript">alert("DEU CERTO");</script>';
     }else{
         echo '<script type="text/javascript">alert("Erro em cadastrar");</script>';
@@ -138,7 +138,7 @@ include_once DIRNAV . 'nav.php';
 <!-- CRIAR OU ALTERAR ANUNCIOS -->
 <!-- FORMULARIO PARA CRIAR -->
     <div class="panel panel-primary list-group col-6 border bg-light">
-            <form name="formCad" action="" method="post">
+            <form enctype="multipart/form-data" name="formCad" action="" method="post" >
 
                 <input type="hidden" name="id" value="<?=$objFc->tratarCaracter((isset($produto['pk_produto']))?($produto['pk_produto']):(''), 2)?>"><br>
 

@@ -78,6 +78,7 @@ class Produto {
 
 	public function insereProduto($dados){
 		try{
+			print_r($_FILES);
 			$this->nomeProduto = $this->objfc->tratarCaracter($dados['nomeProduto'], 1);
 			$this->descricaoProduto = $this->objfc->tratarCaracter($dados['descricaoProduto'], 1);
 			$this->preco = $dados['preco'];
@@ -85,7 +86,7 @@ class Produto {
 			$this->diaDaSemana = $dados['diaDaSemana'];
 			$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
 			$this->dataCadastro = date("d/m/Y");
-			//$fotoup = $_FILES['userfile']['name'];
+			$fotoup = $_FILES['userfile']['name'];
 			//$this->dataCadastro = $this->objfc->dataAtual(2);
 			//$this->vencimento = $this->objfc->tratarCaracter($dados['vencimento'], 1);
 			//$this->fornecedor = $this->objfc->tratarCaracter($dados['fornecedor'], 1);
@@ -177,7 +178,7 @@ class Produto {
 					//}
 				//}
 			//}
-			print_r($_FILES);
+			
 
 			print_r($dados);
 
